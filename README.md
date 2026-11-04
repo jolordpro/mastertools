@@ -8,9 +8,7 @@ The core is always in. Work gets a check before it counts as done. A profile set
 
 ## Install
 
-The picker at [jolord.com/master-tools](https://jolord.com/master-tools) asks about the work, then writes the install commands and a starter profile.
-
-The same install by hand, in a terminal:
+Two lines in a terminal install the core:
 
 ```bash
 claude plugin marketplace add jolordpro/mastertools
@@ -36,7 +34,7 @@ A new Claude Code session picks up the setup.
 - **Time log** · `mastertools-ledgers` · A running log of the time Claude saves, with a timing block in each script Claude writes.
 - **Motion craft** · `mastertools-motion-craft` · Designing or reviewing motion.
 - **Photoshop and Adobe plugins** · `mastertools-photoshop-uxp` · Photoshop scripts, and UXP plugins for Photoshop, InDesign and Premiere Pro.
-- **Plan and review** · `mastertools-plan-review` · Plans pressure-tested, facts researched, and work audited before it counts as done. Ticked by default in the picker.
+- **Plan and review** · `mastertools-plan-review` · Plans pressure-tested, facts researched, and work audited before it counts as done. Suggested alongside the core.
 - **Threads and handoff** · `mastertools-threads` · Long projects that run across sessions or accounts.
 - **UI design** · `mastertools-ui-design` · App and web screens, judged against a taste profile that grows from picks over time.
 - **Writing** · `mastertools-writing` · Copy that other people read.
