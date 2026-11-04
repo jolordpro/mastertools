@@ -1,0 +1,43 @@
+{
+  "$comment": "Least-privilege UXP manifest v5 template. Start here; add permissions ONLY when the task requires them, and record why in the adjacent $comment. Version facts: see references/current-versions.md — set minVersion to the lowest PS you actually test.",
+  "manifestVersion": 5,
+  "id": "com.example.CHANGE_ME",
+  "name": "CHANGE ME",
+  "version": "1.0.0",
+  "main": "index.html",
+  "host": [
+    {
+      "app": "PS",
+      "minVersion": "26.0.0",
+      "data": {
+        "apiVersion": 2
+      }
+    }
+  ],
+  "entrypoints": [
+    {
+      "type": "panel",
+      "id": "mainPanel",
+      "label": { "default": "CHANGE ME" },
+      "minimumSize": { "width": 260, "height": 300 },
+      "preferredDockedSize": { "width": 300, "height": 480 }
+    }
+  ],
+  "requiredPermissions": {
+    "$comment": "DELIBERATELY EMPTY BY DEFAULT. Escalation menu — copy in only what you need:",
+    "$escalation_notes": {
+      "localFileSystem": "'request' lets the user pick folders (preferred). 'fullAccess' only for trusted internal tools that must roam — expect Marketplace scrutiny. 'plugin' = sandbox only.",
+      "network": "{ \"domains\": [\"https://api.example.com\"] } — enumerate exact domains; NO top-level wildcards. Talking to a local daemon? List BOTH http://localhost:PORT and http://127.0.0.1:PORT (known flakiness — see pitfalls-registry).",
+      "launchProcess": "{ \"schemes\": [\"https\"], \"extensions\": [\".pdf\"] } — gates shell.openExternal/openPath; user sees a consent dialog at runtime.",
+      "clipboard": "'read' or 'readAndWrite' — readAndWrite only if the feature is clipboard-centric.",
+      "webview": "{ \"domains\": [\"https://embedded.example.com\"], \"enableMessageBridge\": \"localOnly\" } — bridge value REQUIRED for postMessage; localAndRemote only when remote pages must message the plugin. Local HTML needs UXP 8.0+ (PS 26+).",
+      "allowCodeGenerationFromStrings": "true only if a dependency demands eval — try to eliminate the dependency first.",
+      "enableAddon": "true only for C++ hybrid builds — brings signing/notarization/tri-arch/admin-install requirements (see hybrid-cpp-and-webview.md).",
+      "ipc": "{ \"enablePluginCommunication\": true } — plugin-to-plugin messaging only."
+    }
+  },
+  "icons": [
+    { "width": 23, "height": 23, "path": "icons/dark.png", "scale": [1, 2], "theme": ["darkest", "dark", "medium"] },
+    { "width": 23, "height": 23, "path": "icons/light.png", "scale": [1, 2], "theme": ["lightest", "light"] }
+  ]
+}

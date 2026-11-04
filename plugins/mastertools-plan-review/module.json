@@ -1,0 +1,15 @@
+{
+  "id": "mastertools-plan-review",
+  "title": "Plan and review",
+  "question": "Plans pressure-tested, facts researched, and work audited before it counts as done.",
+  "default_on": true,
+  "depends_on": [
+    "mastertools-core"
+  ],
+  "conflicts_with": [],
+  "skills": [
+    "challenger",
+    "shakedown",
+    "scout"
+  ]
+}

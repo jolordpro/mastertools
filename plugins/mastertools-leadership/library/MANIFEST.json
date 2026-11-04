@@ -1,0 +1,67 @@
+{
+  "package_name": "Leadership_RAG_Library_Source_of_Truth",
+  "package_version": "1.0",
+  "packaged_date": "2026-07-23",
+  "status": "production_ready",
+  "primary_audience": ["Leaders of Leaders", "Talent/OD professionals", "Board-facing executives", "AI Coach implementers"],
+  "binding_governance_files": [
+    "00_START_HERE.md",
+    "02_AI_Coach_Operating_Manual.md",
+    "05_Contradiction_and_Evidence_Log.md"
+  ],
+  "control_layer": [
+    {"file": "00_README_FOR_CLAUDE.md", "role": "Package entry point for Claude"},
+    {"file": "00_START_HERE.md", "role": "Anti-hallucination + Person-vs-System + escalation"},
+    {"file": "01_Taxonomy_Controlled_Vocabulary.md", "role": "Controlled vocabulary"},
+    {"file": "02_AI_Coach_Operating_Manual.md", "role": "AI Coach operating system"},
+    {"file": "03_Master_Index_and_Reading_Paths.md", "role": "Inventory"},
+    {"file": "04_Retrieval_Playbook_and_Priority.md", "role": "Retrieval rules"},
+    {"file": "05_Contradiction_and_Evidence_Log.md", "role": "Evidence boundaries + tensions"},
+    {"file": "06_Reading_Paths_and_Onboarding.md", "role": "Navigation paths"},
+    {"file": "07_Golden_Questions_and_Retrieval_Tests.md", "role": "Validation set"},
+    {"file": "08_Hardening_Addenda_and_Tier2_Backlog.md", "role": "Future work"},
+    {"file": "09_Compilation_and_Source_of_Truth_Packaging.md", "role": "Packaging spec"}
+  ],
+  "core_super_pages": [
+    {"file": "Core_Canonical_Super_Pages/Systems_Thinking_Complex_Adaptive_Systems.md", "id": "SYS-CAS-001", "version": "1.1"},
+    {"file": "Core_Canonical_Super_Pages/Observation_to_Coaching_Bridge_and_Cascade_Health_Dashboard.md", "id": "BRIDGE-001", "version": "1.2"},
+    {"file": "Core_Canonical_Super_Pages/Psychological_Safety_Multi_Layer.md", "id": "SAFE-001", "version": "1.1"},
+    {"file": "Core_Canonical_Super_Pages/Capacity_for_Complexity_and_Enabling_Leadership.md", "id": "CAP-001", "version": "1.1"},
+    {"file": "Core_Canonical_Super_Pages/Resilience_Energy_Management.md", "id": "ENERGY-001", "version": "1.1"},
+    {"file": "Core_Canonical_Super_Pages/AI_Transformation_Leadership.md", "id": "AI-001", "version": "1.2"},
+    {"file": "Core_Canonical_Super_Pages/Dark_Side_Toxic_High_Performers.md", "id": "DARK-001", "version": "1.1"},
+    {"file": "Core_Canonical_Super_Pages/Sponsorship_Systems.md", "id": "SPONSOR-001", "version": "1.1"},
+    {"file": "Core_Canonical_Super_Pages/Generativity_Legacy_Wisdom_Transfer.md", "id": "GEN-001", "version": "1.1"},
+    {"file": "Core_Canonical_Super_Pages/Leadership_Pipeline_Passages.md", "id": "PIPE-001", "version": "1.1"},
+    {"file": "Core_Canonical_Super_Pages/People_Leader_Role_Redesign.md", "id": "PEOPLE-001", "version": "1.1"},
+    {"file": "Core_Canonical_Super_Pages/Board_Fluency_and_Governance.md", "id": "BOARD-001", "version": "1.2"},
+    {"file": "Core_Canonical_Super_Pages/Cultural_Intelligence_and_Context.md", "id": "CQ-001", "version": "1.2"}
+  ],
+  "validation": {
+    "golden_question_sets": {
+      "00_START_HERE_section_9": 15,
+      "CTRL-07_clusters_A_to_H": 16
+    },
+    "2026-07-23_expert_simulation": {
+      "result": "correct primary Super Page retrieval across the tested set; ~8.8/10 average; zero evidence upgrades; zero bias failures",
+      "caveat": "recorded in CTRL-05 section 6; the detailed source log is not included in this package and the original '18/18' figure matched neither question set"
+    },
+    "2026-07-26_blind_agent_pass": {
+      "result": "all questions in both sets passed; routing tested blind (no skill named)",
+      "logs": "Test_Results/Skill_Acceptance_2026-07-26.md, GQ_Second_Pass_2026-07-26.md, CTRL07_Completion_2026-07-26.md"
+    },
+    "evidence_upgrades": 0,
+    "bias_failures": 0
+  },
+  "load_order_recommendation": [
+    "00_README_FOR_CLAUDE.md",
+    "00_START_HERE.md",
+    "02_AI_Coach_Operating_Manual.md",
+    "05_Contradiction_and_Evidence_Log.md",
+    "04_Retrieval_Playbook_and_Priority.md",
+    "06_Reading_Paths_and_Onboarding.md",
+    "BRIDGE-001",
+    "SAFE-001", "ENERGY-001", "CAP-001",
+    "domain Super Pages as needed"
+  ]
+}

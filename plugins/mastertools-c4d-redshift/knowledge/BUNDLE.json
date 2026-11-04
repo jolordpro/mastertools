@@ -1,0 +1,8 @@
+{
+  "cards": 3973,
+  "cards_left_out": [
+    "education/education-blocked-sources-for-jos-browser",
+    "pipeline/pipeline-youtube-transcripts"
+  ],
+  "lines_dropped": 65
+}

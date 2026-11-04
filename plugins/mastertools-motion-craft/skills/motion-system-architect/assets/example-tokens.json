@@ -1,0 +1,617 @@
+{
+  "$description": "Example motion tokens for the Motion System Architect skill. Generic 'Northwind' system: thesis = precise, quiet confidence; verbs = reveal, dismiss, shift, settle, confirm.",
+  "primitive": {
+    "duration": {
+      "$type": "duration",
+      "instant": {
+        "$value": {
+          "value": 0,
+          "unit": "ms"
+        }
+      },
+      "d100": {
+        "$value": {
+          "value": 100,
+          "unit": "ms"
+        }
+      },
+      "d200": {
+        "$value": {
+          "value": 200,
+          "unit": "ms"
+        }
+      },
+      "d300": {
+        "$value": {
+          "value": 300,
+          "unit": "ms"
+        }
+      },
+      "d500": {
+        "$value": {
+          "value": 500,
+          "unit": "ms"
+        }
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "out": {
+        "$value": [
+          0.25,
+          0.7,
+          0.2,
+          1
+        ]
+      },
+      "in": {
+        "$value": [
+          0.7,
+          0,
+          0.84,
+          0
+        ]
+      },
+      "inOut": {
+        "$value": [
+          0.65,
+          0,
+          0.35,
+          1
+        ]
+      },
+      "linear": {
+        "$value": [
+          0,
+          0,
+          1,
+          1
+        ]
+      }
+    },
+    "spring": {
+      "$type": "transition",
+      "settle": {
+        "$value": {
+          "duration": {
+            "value": 300,
+            "unit": "ms"
+          },
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": [
+            0.16,
+            1,
+            0.3,
+            1
+          ]
+        },
+        "$description": "Spring primitive. $value is the fallback for tools that ignore the spring extension.",
+        "$extensions": {
+          "dev.motion-system": {
+            "spring": {
+              "stiffness": 700,
+              "damping": 0.9,
+              "mass": 1
+            },
+            "status": "active",
+            "version": "1.0.0"
+          }
+        }
+      }
+    }
+  },
+  "semantic": {
+    "duration": {
+      "$type": "duration",
+      "micro": {
+        "$value": "{primitive.duration.d100}",
+        "$description": "Direct feedback; should feel synchronous with input.",
+        "$extensions": {
+          "dev.motion-system": {
+            "semanticRole": "feedback",
+            "contexts": [
+              "hover",
+              "press",
+              "toggle"
+            ],
+            "reducedMotion": {
+              "strategy": "state-only"
+            },
+            "status": "active",
+            "version": "1.0.0",
+            "provenance": "example-system/core",
+            "modes": {
+              "reduced": "{primitive.duration.d100}",
+              "instant": "{primitive.duration.instant}"
+            }
+          }
+        }
+      },
+      "short": {
+        "$value": "{primitive.duration.d200}",
+        "$description": "State changes and small enters/exits.",
+        "$extensions": {
+          "dev.motion-system": {
+            "semanticRole": "state-change",
+            "contexts": [
+              "dropdown",
+              "tooltip",
+              "expand"
+            ],
+            "reducedMotion": {
+              "strategy": "reduce-amplitude"
+            },
+            "status": "active",
+            "version": "1.0.0",
+            "provenance": "example-system/core",
+            "modes": {
+              "reduced": "{primitive.duration.d100}",
+              "instant": "{primitive.duration.instant}"
+            }
+          }
+        }
+      },
+      "medium": {
+        "$value": "{primitive.duration.d300}",
+        "$description": "Large enters, dialogs, view changes.",
+        "$extensions": {
+          "dev.motion-system": {
+            "semanticRole": "transition",
+            "contexts": [
+              "dialog",
+              "sheet",
+              "navigation"
+            ],
+            "reducedMotion": {
+              "strategy": "fade"
+            },
+            "status": "active",
+            "version": "1.0.0",
+            "provenance": "example-system/core",
+            "modes": {
+              "reduced": "{primitive.duration.d200}",
+              "instant": "{primitive.duration.instant}"
+            }
+          }
+        }
+      },
+      "long": {
+        "$value": "{primitive.duration.d500}",
+        "$description": "Rare, large or milestone motion; spend sparingly.",
+        "$extensions": {
+          "dev.motion-system": {
+            "semanticRole": "milestone",
+            "contexts": [
+              "onboarding",
+              "celebration"
+            ],
+            "reducedMotion": {
+              "strategy": "fade"
+            },
+            "status": "active",
+            "version": "1.0.0",
+            "provenance": "example-system/core",
+            "modes": {
+              "reduced": "{primitive.duration.d200}",
+              "instant": "{primitive.duration.instant}"
+            }
+          }
+        }
+      },
+      "stagger": {
+        "$value": "{primitive.duration.d100}",
+        "$description": "Interval between siblings in a staggered group (capped by maxItems).",
+        "$extensions": {
+          "dev.motion-system": {
+            "semanticRole": "rhythm",
+            "contexts": [
+              "list",
+              "grid"
+            ],
+            "reducedMotion": {
+              "strategy": "instant"
+            },
+            "status": "active",
+            "version": "1.0.0",
+            "provenance": "example-system/core",
+            "modes": {
+              "reduced": "{primitive.duration.instant}",
+              "instant": "{primitive.duration.instant}"
+            },
+            "stagger": {
+              "interval": "{primitive.duration.d100}",
+              "order": "forward",
+              "maxItems": 6
+            }
+          }
+        }
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "enter": {
+        "$value": "{primitive.easing.out}",
+        "$description": "Arrive with attention, resolve quickly.",
+        "$extensions": {
+          "dev.motion-system": {
+            "semanticRole": "enter",
+            "contexts": [
+              "enter"
+            ],
+            "reducedMotion": {
+              "strategy": "fade"
+            },
+            "status": "active",
+            "version": "1.0.0",
+            "provenance": "example-system/core"
+          }
+        }
+      },
+      "exit": {
+        "$value": "{primitive.easing.in}",
+        "$description": "Leave decisively so the workflow is not blocked.",
+        "$extensions": {
+          "dev.motion-system": {
+            "semanticRole": "exit",
+            "contexts": [
+              "exit"
+            ],
+            "reducedMotion": {
+              "strategy": "fade"
+            },
+            "status": "active",
+            "version": "1.0.0",
+            "provenance": "example-system/core"
+          }
+        }
+      },
+      "move": {
+        "$value": "{primitive.easing.inOut}",
+        "$description": "Reposition while preserving continuity.",
+        "$extensions": {
+          "dev.motion-system": {
+            "semanticRole": "move",
+            "contexts": [
+              "reposition"
+            ],
+            "reducedMotion": {
+              "strategy": "fade"
+            },
+            "status": "active",
+            "version": "1.0.0",
+            "provenance": "example-system/core"
+          }
+        }
+      },
+      "loop": {
+        "$value": "{primitive.easing.linear}",
+        "$description": "Uniform ongoing change (progress, ambient).",
+        "$extensions": {
+          "dev.motion-system": {
+            "semanticRole": "linear-loop",
+            "contexts": [
+              "progress"
+            ],
+            "reducedMotion": {
+              "strategy": "static"
+            },
+            "status": "active",
+            "version": "1.0.0",
+            "provenance": "example-system/core"
+          }
+        }
+      }
+    },
+    "verb": {
+      "$type": "transition",
+      "reveal": {
+        "$value": {
+          "duration": "{semantic.duration.medium}",
+          "delay": "{primitive.duration.instant}",
+          "timingFunction": "{semantic.easing.enter}"
+        },
+        "$description": "REVEAL: make existing information legible, anchored to its source.",
+        "$extensions": {
+          "dev.motion-system": {
+            "semanticRole": "enter",
+            "contexts": [
+              "dialog",
+              "list-item",
+              "toast"
+            ],
+            "reducedMotion": {
+              "strategy": "fade"
+            },
+            "status": "active",
+            "version": "1.0.0",
+            "provenance": "example-system/core",
+            "modes": {
+              "reduced": {
+                "duration": "{semantic.duration.short}",
+                "delay": "{primitive.duration.instant}",
+                "timingFunction": "{semantic.easing.move}"
+              },
+              "instant": {
+                "duration": "{primitive.duration.instant}",
+                "delay": "{primitive.duration.instant}",
+                "timingFunction": "{semantic.easing.move}"
+              }
+            },
+            "platformMappings": {
+              "css": "--motion-reveal",
+              "ae": "Verb/Reveal",
+              "swiftui": ".snappy"
+            }
+          }
+        }
+      },
+      "dismiss": {
+        "$value": {
+          "duration": "{semantic.duration.short}",
+          "delay": "{primitive.duration.instant}",
+          "timingFunction": "{semantic.easing.exit}"
+        },
+        "$description": "DISMISS: remove content; exits are faster than enters.",
+        "$extensions": {
+          "dev.motion-system": {
+            "semanticRole": "exit",
+            "contexts": [
+              "dialog",
+              "toast",
+              "popover"
+            ],
+            "reducedMotion": {
+              "strategy": "fade"
+            },
+            "status": "active",
+            "version": "1.0.0",
+            "provenance": "example-system/core",
+            "modes": {
+              "reduced": {
+                "duration": "{semantic.duration.micro}",
+                "delay": "{primitive.duration.instant}",
+                "timingFunction": "{semantic.easing.move}"
+              },
+              "instant": {
+                "duration": "{primitive.duration.instant}",
+                "delay": "{primitive.duration.instant}",
+                "timingFunction": "{semantic.easing.move}"
+              }
+            },
+            "platformMappings": {
+              "css": "--motion-dismiss",
+              "ae": "Verb/Dismiss"
+            }
+          }
+        }
+      },
+      "shift": {
+        "$value": {
+          "duration": "{semantic.duration.medium}",
+          "delay": "{primitive.duration.instant}",
+          "timingFunction": "{semantic.easing.move}"
+        },
+        "$description": "SHIFT: change perspective or reposition while preserving identity.",
+        "$extensions": {
+          "dev.motion-system": {
+            "semanticRole": "move",
+            "contexts": [
+              "navigation",
+              "reorder",
+              "tab"
+            ],
+            "reducedMotion": {
+              "strategy": "reduce-amplitude"
+            },
+            "status": "active",
+            "version": "1.0.0",
+            "provenance": "example-system/core",
+            "modes": {
+              "reduced": {
+                "duration": "{semantic.duration.short}",
+                "delay": "{primitive.duration.instant}",
+                "timingFunction": "{semantic.easing.move}"
+              },
+              "instant": {
+                "duration": "{primitive.duration.instant}",
+                "delay": "{primitive.duration.instant}",
+                "timingFunction": "{semantic.easing.move}"
+              }
+            }
+          }
+        }
+      },
+      "settle": {
+        "$value": "{primitive.spring.settle}",
+        "$description": "SETTLE: physical resolution after direct manipulation; the only verb allowed overshoot.",
+        "$extensions": {
+          "dev.motion-system": {
+            "semanticRole": "settle",
+            "contexts": [
+              "drag-release",
+              "card-drop"
+            ],
+            "reducedMotion": {
+              "strategy": "tighten-spring"
+            },
+            "status": "active",
+            "version": "1.0.0",
+            "provenance": "example-system/core",
+            "modes": {
+              "reduced": {
+                "duration": "{semantic.duration.short}",
+                "delay": "{primitive.duration.instant}",
+                "timingFunction": "{semantic.easing.enter}"
+              },
+              "instant": {
+                "duration": "{primitive.duration.instant}",
+                "delay": "{primitive.duration.instant}",
+                "timingFunction": "{semantic.easing.move}"
+              }
+            }
+          }
+        }
+      },
+      "confirm": {
+        "$value": {
+          "duration": "{semantic.duration.short}",
+          "delay": "{primitive.duration.instant}",
+          "timingFunction": "{semantic.easing.enter}"
+        },
+        "$description": "CONFIRM: short, decisive completion; never celebratory.",
+        "$extensions": {
+          "dev.motion-system": {
+            "semanticRole": "confirmation",
+            "contexts": [
+              "save",
+              "send",
+              "toggle"
+            ],
+            "reducedMotion": {
+              "strategy": "state-only"
+            },
+            "status": "active",
+            "version": "1.0.0",
+            "provenance": "example-system/core",
+            "modes": {
+              "reduced": {
+                "duration": "{semantic.duration.micro}",
+                "delay": "{primitive.duration.instant}",
+                "timingFunction": "{semantic.easing.enter}"
+              },
+              "instant": {
+                "duration": "{primitive.duration.instant}",
+                "delay": "{primitive.duration.instant}",
+                "timingFunction": "{semantic.easing.move}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "component": {
+    "$type": "transition",
+    "dialog": {
+      "enter": {
+        "$value": "{semantic.verb.reveal}",
+        "$extensions": {
+          "dev.motion-system": {
+            "status": "active",
+            "version": "1.0.0"
+          }
+        }
+      },
+      "exit": {
+        "$value": "{semantic.verb.dismiss}",
+        "$extensions": {
+          "dev.motion-system": {
+            "status": "active",
+            "version": "1.0.0"
+          }
+        }
+      }
+    },
+    "toast": {
+      "enter": {
+        "$value": "{semantic.verb.reveal}",
+        "$extensions": {
+          "dev.motion-system": {
+            "status": "active",
+            "version": "1.0.0"
+          }
+        }
+      }
+    },
+    "listItem": {
+      "enter": {
+        "$value": "{semantic.verb.reveal}",
+        "$extensions": {
+          "dev.motion-system": {
+            "status": "active",
+            "version": "1.0.0"
+          }
+        }
+      }
+    },
+    "card": {
+      "drop": {
+        "$value": "{semantic.verb.settle}",
+        "$extensions": {
+          "dev.motion-system": {
+            "status": "experimental",
+            "version": "0.2.0"
+          }
+        }
+      }
+    },
+    "button": {
+      "press": {
+        "$value": "{semantic.verb.confirm}",
+        "$extensions": {
+          "dev.motion-system": {
+            "status": "active",
+            "version": "1.0.0"
+          }
+        }
+      }
+    },
+    "tab": {
+      "switch": {
+        "$value": "{semantic.verb.shift}",
+        "$extensions": {
+          "dev.motion-system": {
+            "status": "active",
+            "version": "1.0.0"
+          }
+        }
+      }
+    }
+  },
+  "choreography": {
+    "$type": "transition",
+    "dialogOpen": {
+      "$value": "{component.dialog.enter}",
+      "$description": "Backdrop establishes scope, panel enters, controls settle after.",
+      "$extensions": {
+        "dev.motion-system": {
+          "status": "active",
+          "version": "1.0.0",
+          "sequence": [
+            {
+              "token": "{component.dialog.enter}",
+              "role": "lead",
+              "offset": {
+                "value": 0,
+                "unit": "ms"
+              }
+            },
+            {
+              "token": "{component.listItem.enter}",
+              "role": "support",
+              "offset": "{primitive.duration.d100}"
+            }
+          ]
+        }
+      }
+    },
+    "listReveal": {
+      "$value": "{component.listItem.enter}",
+      "$description": "Items enter with a capped stagger; lead item first.",
+      "$extensions": {
+        "dev.motion-system": {
+          "status": "active",
+          "version": "1.0.0",
+          "stagger": {
+            "interval": "{semantic.duration.stagger}",
+            "order": "forward",
+            "maxItems": 6
+          }
+        }
+      }
+    }
+  }
+}

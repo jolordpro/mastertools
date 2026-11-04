@@ -1,0 +1,27 @@
+# Prose rules for review reports. One rule per line; # comments allowed.
+# word: <word or phrase>          banned anywhere (whole word, any case)
+# max-dashes-per-paragraph: N     em dashes (—) allowed per paragraph
+# max-table-columns: N            columns allowed in a Markdown table
+max-dashes-per-paragraph: 1
+max-table-columns: 2
+word: really
+word: very
+word: just
+word: actually
+word: spearheaded
+word: leverage
+word: utilize
+word: genuinely
+word: honestly
+word: game-changer
+word: dynamic
+word: innovative
+word: scalable
+word: harness
+word: unlock
+word: elevate
+word: seamlessly
+word: delve
+word: tapestry
+word: revolutionary
+word: cutting-edge

@@ -1,0 +1,14 @@
+{
+  "id": "mastertools-writing",
+  "title": "Writing",
+  "question": "Copy that other people read.",
+  "default_on": false,
+  "depends_on": [
+    "mastertools-core"
+  ],
+  "conflicts_with": [],
+  "skills": [
+    "copywriting",
+    "tighten"
+  ]
+}

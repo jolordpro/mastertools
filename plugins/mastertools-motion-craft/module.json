@@ -1,0 +1,14 @@
+{
+  "id": "mastertools-motion-craft",
+  "title": "Motion craft",
+  "question": "Designing or reviewing motion.",
+  "default_on": false,
+  "depends_on": [
+    "mastertools-core"
+  ],
+  "conflicts_with": [],
+  "skills": [
+    "motion-critique",
+    "motion-system-architect"
+  ]
+}

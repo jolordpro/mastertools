@@ -1,0 +1,366 @@
+<title>Review Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Review report page, shared by challenger, shakedown and stress-test (core/assets).
+   Built from Field Test's report board. Sections with no data hide themselves:
+   personas, break points and lanes appear only for stress-test's tool lane. */
+:root {
+  --bg: #F3F5F8; --surface: #FFFFFF; --sunk: #E8ECF2; --fg: #161B24; --muted: #5A6475; --line: #D3D9E3;
+  --accent: #0B6E8C; --accent-ink: #FFFFFF;
+  --sev-blocker: #C4202F; --sev-high: #D9640B; --sev-medium: #B08A00; --sev-low: #5A6475; --sev-enh: #2F7D4A; --clean: #2F7D4A;
+  --font-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11151C; --surface: #181E27; --sunk: #0D1117; --fg: #E6EAF0; --muted: #98A2B3; --line: #2A3340;
+  --accent: #4BB3D1; --accent-ink: #0D1117;
+  --sev-blocker: #FF5A66; --sev-high: #FF9A4D; --sev-medium: #E8C547; --sev-low: #98A2B3; --sev-enh: #5CC983; --clean: #5CC983;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #11151C; --surface: #181E27; --sunk: #0D1117; --fg: #E6EAF0; --muted: #98A2B3; --line: #2A3340;
+  --accent: #4BB3D1; --accent-ink: #0D1117;
+  --sev-blocker: #FF5A66; --sev-high: #FF9A4D; --sev-medium: #E8C547; --sev-low: #98A2B3; --sev-enh: #5CC983; --clean: #5CC983;
+  color-scheme: dark; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; padding-inline: 16px; padding-block: 24px 64px; }
+.wrap { max-width: 1080px; margin: 0 auto; display: grid; gap: 28px; }
+h1, h2, h3 { font-family: var(--font-display); font-stretch: 80%; text-wrap: balance; margin: 0; line-height: 1.1; }
+h1 { font-size: clamp(28px, 5vw, 40px); font-weight: 800; }
+h2 { font-size: 20px; font-weight: 700; letter-spacing: 0.01em; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.example { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; border: 1px dashed var(--sev-medium); color: var(--sev-medium); padding: 2px 8px; border-radius: 4px; }
+section { display: grid; gap: 12px; min-width: 0; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Slate */
+.slate { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: grid; gap: 14px; }
+.slate-meta { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.verdict { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.verdict li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; }
+.verdict li::before { content: counter(v); counter-increment: v; font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding-top: 2px; }
+.verdict { counter-reset: v; }
+.works { color: var(--muted); font-size: 14px; }
+
+/* Coverage strip */
+.strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 4px; }
+.stat b { font-family: var(--font-display); font-stretch: 80%; font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.lanes { display: flex; height: 8px; border-radius: 4px; overflow: hidden; background: var(--sunk); }
+.lanes span { display: block; height: 100%; }
+.skipped { font-size: 13px; color: var(--muted); }
+
+/* Heatmap */
+.scroll-x { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td.cell { text-align: center; font-family: var(--font-mono); font-variant-numeric: tabular-nums; min-width: 64px; }
+tr:last-child td { border-bottom: 0; }
+.persona-btn { background: none; border: 0; padding: 0; color: var(--fg); text-align: left; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+.landmark { font-family: var(--font-mono); font-size: 10px; color: var(--accent); margin-left: 6px; letter-spacing: 0.06em; }
+
+/* Filters */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chip { border: 1px solid var(--line); background: var(--surface); color: var(--fg); border-radius: 999px; padding: 5px 12px; font-size: 13px; display: inline-flex; gap: 6px; align-items: center; }
+.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+select, input[type="search"] { font: inherit; font-size: 13px; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; min-width: 0; }
+input[type="search"] { flex: 1 1 180px; }
+.primary { background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 8px; padding: 7px 14px; font-size: 13px; font-weight: 600; }
+.ghost { background: none; border: 1px solid var(--line); color: var(--fg); border-radius: 8px; padding: 5px 10px; font-size: 12px; }
+.count { color: var(--muted); font-size: 13px; }
+
+/* Finding cards */
+.list { display: grid; gap: 8px; }
+details.card { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--sev, var(--line)); border-radius: 8px; }
+details.card summary { list-style: none; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: baseline; cursor: pointer; }
+details.card summary::-webkit-details-marker { display: none; }
+.fid { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.ftitle { font-weight: 600; min-width: 0; }
+.pill { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; padding: 2px 8px; border-radius: 4px; color: var(--sev); border: 1px solid var(--sev); white-space: nowrap; }
+.fmeta { grid-column: 2 / -1; font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.body { padding: 0 14px 14px; display: grid; gap: 10px; }
+.row { display: grid; grid-template-columns: 120px 1fr; gap: 10px; font-size: 14px; }
+.row dt { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.row dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.empty { color: var(--muted); font-size: 14px; padding: 16px; border: 1px dashed var(--line); border-radius: 8px; text-align: center; }
+
+/* Reference sections */
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; }
+.plain.clean li::marker { color: var(--clean); }
+.bp { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px; display: grid; gap: 6px; }
+.bp svg { width: 100%; max-width: 460px; height: auto; display: block; }
+.bps { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 16px; }
+.enh-group { display: grid; gap: 6px; }
+pre.ledger { background: var(--sunk); border: 1px solid var(--line); border-radius: 8px; padding: 12px; overflow-x: auto; font-family: var(--font-mono); font-size: 12px; margin: 0; white-space: pre; }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--fg); color: var(--bg); padding: 8px 14px; border-radius: 8px; font-size: 13px; }
+@media (max-width: 560px) { .row { grid-template-columns: 1fr; gap: 2px; } details.card summary { grid-template-columns: 1fr auto; } .fid { grid-column: 1 / -1; } .fmeta { grid-column: 1 / -1; } }
+@media (prefers-reduced-motion: no-preference) { details.card[open] .body { animation: open .18s ease-out; } @keyframes open { from { opacity: .4; transform: translateY(-3px); } } }
+</style>
+
+<div class="wrap" id="app">
+  <header class="slate" aria-labelledby="tool-name">
+    <div class="slate-meta">
+      <span class="eyebrow" id="meta-skill">Review report</span>
+      <span class="eyebrow mono" id="meta-date"></span>
+      <span class="eyebrow" id="meta-tier"></span>
+      <span class="example" id="example-flag" hidden>Example data</span>
+    </div>
+    <h1 id="tool-name"></h1>
+    <ol class="verdict" id="verdict"></ol>
+    <p class="works" id="works"></p>
+  </header>
+
+  <section aria-labelledby="h-cov">
+    <h2 id="h-cov">Coverage</h2>
+    <div class="strip" id="strip"></div>
+    <p class="skipped" id="skipped"></p>
+    <ul class="plain" id="cover"></ul>
+  </section>
+
+  <section aria-labelledby="h-heat" id="sec-heat">
+    <h2 id="h-heat">Who it fails</h2>
+    <div class="scroll-x"><table id="heat"></table></div>
+  </section>
+
+  <section aria-labelledby="h-find">
+    <h2 id="h-find">Findings</h2>
+    <div class="filters" id="sev-filters" role="group" aria-label="Filter by severity"></div>
+    <div class="filters">
+      <label class="count" for="f-type">Type</label>
+      <select id="f-type"><option value="">All types</option></select>
+      <label class="count" for="f-persona" id="l-persona">Persona</label>
+      <select id="f-persona"><option value="">All personas</option></select>
+      <input type="search" id="f-q" placeholder="Search findings" aria-label="Search findings">
+    </div>
+    <div class="filters">
+      <span class="count" id="f-count"></span>
+      <button class="primary" id="copy-top" type="button">Copy all Blockers and Highs</button>
+      <button class="ghost" id="copy-shown" type="button">Copy shown</button>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+
+  <div class="two">
+    <section aria-labelledby="h-clean"><h2 id="h-clean">Clean areas</h2><ul class="plain clean" id="clean"></ul></section>
+    <section aria-labelledby="h-q"><h2 id="h-q">Questions for you</h2><ul class="plain" id="questions"></ul></section>
+  </div>
+
+  <section aria-labelledby="h-bp" id="sec-bp"><h2 id="h-bp">Break points</h2><div class="bps" id="bp"></div></section>
+
+  <section aria-labelledby="h-enh"><h2 id="h-enh">Enhancements</h2><div class="two" id="enh"></div></section>
+
+  <div class="two">
+    <section aria-labelledby="h-seq"><h2 id="h-seq">Fix sequence</h2><ol class="plain" id="seq"></ol></section>
+    <section aria-labelledby="h-next"><h2 id="h-next">Next steps</h2><ul class="plain" id="next"></ul><p class="works" id="run-next"></p></section>
+  </div>
+
+  <section aria-labelledby="h-ledger">
+    <div class="filters"><h2 id="h-ledger">Ledger block</h2><button class="ghost" id="copy-ledger" type="button">Copy</button></div>
+    <pre class="ledger" id="ledger"></pre>
+  </section>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(function () {
+  var FILLED = /*REVIEW_DATA*/null;
+  var SAMPLE = {
+    skill: "shakedown", tool: "Signup service v0.4", date: "2026-10-14", tier: "Standard",
+    verdict: ["1 Blocker, 1 High.", "Top risks: SQL built from user input; passwords stored in plain text.",
+      "Readiness: not ready for the pilot.", "Claims checked: 6, wrong: 1.", "Next move: fix SD-001 before anything else."],
+    works: ["Inputs have one clear owner", "Errors return specific messages"],
+    coverage: { deep: ["server.js"], skimmed: ["signup.html"], not: ["db.js (not in the export)"], skipped: [] },
+    findings: [
+      { id: "SD-001", title: "Email is pasted into the SQL query", type: "Glitch", severity: "Blocker", score: "Blocker condition: security hole", confidence: "Traced",
+        where: "server.js:9", what: "A crafted email runs its own SQL against the volunteers table.", verify: "POST with email = x' OR '1'='1 and watch the query log", fix: "Use a parameterized query", done_when: "The crafted email is stored as text and matches nothing", blast_radius: "Every query built in server.js" },
+      { id: "SD-002", title: "Passwords are stored as typed", type: "Gap", severity: "High", confidence: "Traced",
+        where: "server.js:11", what: "A database leak exposes every password.", verify: "Read the INSERT on line 11", fix: "Hash with a slow password hash before insert", done_when: "No row holds a readable password", blast_radius: "Login, password reset" }
+    ],
+    clean: ["Duplicate emails are refused"], questions: ["Is the pilot internal only?"],
+    fix_sequence: ["SD-001", "SD-002"], next_steps: ["Fix SD-001 and SD-002", "Re-check with shakedown re-verification"],
+    run_next: "Run next: shakedown re-verification on SD-001 and SD-002.",
+    ledger: "- SD-001 · 2026-10-14 · shakedown · Blocker · Traced · \"SQL built from the email field\" · open\n- SD-002 · 2026-10-14 · shakedown · High · Traced · \"Plain-text passwords\" · open"
+  };
+  var D = FILLED || SAMPLE;
+  var SEVS = ["Blocker", "High", "Medium", "Low", "Enhancement"];
+  var SEVVAR = { Blocker: "--sev-blocker", High: "--sev-high", Medium: "--sev-medium", Low: "--sev-low", Enhancement: "--sev-enh" };
+  var LANECOL = { A: "--muted", B: "--accent", C: "--sev-enh", D: "--sev-medium", E: "--sev-high" };
+  var pName = {}; (D.personas || []).forEach(function (p) { pName[p.id] = p.name; });
+  function $(id) { return document.getElementById(id); }
+  function el(tag, attrs, text) { var e = document.createElement(tag); if (attrs) for (var k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; }
+  function sevOf(f) { return f.type === "Enhancement" ? "Enhancement" : (f.severity || "Low"); }
+  function list(id, items) { var ul = $(id); ul.innerHTML = ""; if (!items || !items.length) { ul.appendChild(el("li", null, "None.")); return; } items.forEach(function (t) { ul.appendChild(el("li", null, t)); }); }
+
+  // Slate
+  $("example-flag").hidden = !!FILLED;
+  if (D.skill) { $("meta-skill").textContent = D.skill + " report"; document.title = D.skill + " report"; }
+  var hasPersonas = !!(D.personas && D.personas.length);
+  $("sec-heat").hidden = !hasPersonas; $("f-persona").hidden = !hasPersonas; $("l-persona").hidden = !hasPersonas;
+  $("sec-bp").hidden = !(D.break_points && D.break_points.length);
+  $("run-next").textContent = D.run_next || "";
+  $("tool-name").textContent = D.tool || "Untitled tool";
+  $("meta-date").textContent = D.date || "";
+  $("meta-tier").textContent = (D.tier || "") + " tier";
+  (D.verdict || []).forEach(function (v) { $("verdict").appendChild(el("li", null, v)); });
+  $("works").textContent = (D.works && D.works.length) ? "Already working: " + D.works.join(" · ") : "";
+
+  // Coverage
+  var c = D.coverage || {};
+  var strip = $("strip");
+  function stat(label, value, extra) { var s = el("div", { "class": "stat" }); s.appendChild(el("span", { "class": "eyebrow" }, label)); s.appendChild(el("b", null, value)); if (extra) s.appendChild(extra); strip.appendChild(s); }
+  if (c.tests_planned) stat("Tests run", (c.tests_run || 0) + " / " + c.tests_planned);
+  if (c.controls_total) stat("Controls touched", (c.controls_touched || 0) + " / " + c.controls_total);
+  ["deep", "skimmed", "not"].forEach(function (k) { if (c[k]) $("cover").appendChild(el("li", null, { deep: "Read deeply: ", skimmed: "Skimmed: ", not: "Not examined: " }[k] + (c[k].length ? c[k].join(", ") : "none"))); });
+  var bl = c.by_lane || {}; var total = 0; Object.keys(bl).forEach(function (k) { total += bl[k]; });
+  var bar = el("div", { "class": "lanes", role: "img", "aria-label": Object.keys(bl).map(function (k) { return "lane " + k + ": " + bl[k]; }).join(", ") });
+  Object.keys(bl).forEach(function (k) { if (!bl[k]) return; var s = el("span"); s.style.width = (bl[k] / total * 100) + "%"; s.style.background = "var(" + (LANECOL[k] || "--muted") + ")"; s.title = "Lane " + k + ": " + bl[k]; bar.appendChild(s); });
+  if (total) stat("Results by lane", Object.keys(bl).filter(function (k) { return bl[k]; }).map(function (k) { return k + " " + bl[k]; }).join(" · ") || "none", bar);
+  stat("Findings", String((D.findings || []).filter(function (f) { return f.type !== "Enhancement"; }).length));
+  $("skipped").textContent = (c.skipped && c.skipped.length) ? "Skipped: " + c.skipped.join("; ") : "Nothing skipped.";
+
+  // Heatmap
+  var heat = $("heat");
+  var thead = el("tr"); thead.appendChild(el("th", null, "Persona"));
+  SEVS.forEach(function (s) { thead.appendChild(el("th", null, s === "Enhancement" ? "Enh." : s)); });
+  heat.appendChild(thead);
+  var rows = (D.personas || []).slice(); rows.push({ id: "__everyday", name: "Everyday suite (all users)" });
+  rows.forEach(function (p) {
+    var tr = el("tr"); var td0 = el("td");
+    var b = el("button", { "class": "persona-btn", type: "button" }, p.name); b.addEventListener("click", function () { $("f-persona").value = p.id; render(); $("list").scrollIntoView({ behavior: "smooth" }); });
+    td0.appendChild(b); if (p.landmark) td0.appendChild(el("span", { "class": "landmark" }, "LANDMARK")); tr.appendChild(td0);
+    SEVS.forEach(function (s) {
+      var n = (D.findings || []).filter(function (f) { return sevOf(f) === s && (p.id === "__everyday" ? f.everyday : (f.personas || []).indexOf(p.id) > -1); }).length;
+      var td = el("td", { "class": "cell" }, n ? String(n) : "·");
+      if (n) td.style.background = "color-mix(in srgb, var(" + SEVVAR[s] + ") " + Math.min(14 + n * 12, 60) + "%, transparent)";
+      tr.appendChild(td);
+    });
+    heat.appendChild(tr);
+  });
+
+  // Filters
+  var active = {}; SEVS.forEach(function (s) { active[s] = true; });
+  var sevBox = $("sev-filters");
+  SEVS.forEach(function (s) {
+    var n = (D.findings || []).filter(function (f) { return sevOf(f) === s; }).length;
+    var b = el("button", { "class": "chip", type: "button", "aria-pressed": "true" });
+    var d = el("span", { "class": "dot" }); d.style.background = "var(" + SEVVAR[s] + ")"; b.appendChild(d);
+    b.appendChild(document.createTextNode(s + " " + n));
+    b.addEventListener("click", function () { active[s] = !active[s]; b.setAttribute("aria-pressed", active[s] ? "true" : "false"); render(); });
+    sevBox.appendChild(b);
+  });
+  var types = []; (D.findings || []).forEach(function (f) { if (types.indexOf(f.type) < 0) types.push(f.type); });
+  types.forEach(function (t) { $("f-type").appendChild(el("option", { value: t }, t)); });
+  rows.forEach(function (p) { $("f-persona").appendChild(el("option", { value: p.id }, p.name)); });
+  ["f-type", "f-persona"].forEach(function (id) { $(id).addEventListener("change", render); });
+  $("f-q").addEventListener("input", render);
+
+  function workOrder(f) {
+    var who = (f.personas || []).map(function (id) { return pName[id] || id; }); if (f.everyday) who.push("Everyday suite");
+    var head = f.id + " · " + f.type + " · " + (f.type === "Enhancement" ? ("Effort " + f.effort + " · Value " + f.value) : (f.severity + (f.score ? " (" + f.score + ")" : ""))) + " · " + f.confidence + (f.lane ? " (lane " + f.lane + ")" : "");
+    var lines = [head, f.title, "Where: " + f.where];
+    if (f.what) lines.push("What: " + f.what);
+    if (who.length) lines.push("Who hits it: " + who.join(", "));
+    if (f.repro) lines.push("Repro: " + f.repro);
+    if (f.expected) lines.push("Expected (" + (f.oracle || "n/a") + "): " + f.expected);
+    if (f.actual) lines.push("Actual: " + f.actual);
+    if (f.verify) lines.push("Verify: " + f.verify);
+    lines.push("Fix: " + f.fix, "Done when: " + f.done_when, "Blast radius: " + f.blast_radius);
+    return lines.join("\n");
+  }
+  function shown() {
+    var t = $("f-type").value, p = $("f-persona").value, q = $("f-q").value.trim().toLowerCase();
+    return (D.findings || []).filter(function (f) {
+      if (!active[sevOf(f)]) return false;
+      if (t && f.type !== t) return false;
+      if (p && !(p === "__everyday" ? f.everyday : (f.personas || []).indexOf(p) > -1)) return false;
+      if (q && workOrder(f).toLowerCase().indexOf(q) < 0) return false;
+      return true;
+    }).sort(function (a, b) { return SEVS.indexOf(sevOf(a)) - SEVS.indexOf(sevOf(b)); });
+  }
+  function render() {
+    var box = $("list"); box.innerHTML = ""; var items = shown();
+    $("f-count").textContent = items.length + " of " + (D.findings || []).length + " shown";
+    if (!items.length) { box.appendChild(el("div", { "class": "empty" }, "No findings match these filters.")); return; }
+    items.forEach(function (f) {
+      var s = sevOf(f); var card = el("details", { "class": "card" }); card.style.setProperty("--sev", "var(" + SEVVAR[s] + ")");
+      var sum = el("summary"); sum.appendChild(el("span", { "class": "fid" }, f.id)); sum.appendChild(el("span", { "class": "ftitle" }, f.title));
+      sum.appendChild(el("span", { "class": "pill" }, f.type === "Enhancement" ? ("Enh · " + f.effort + " / " + f.value) : (s + (f.score && s !== "Blocker" ? " · " + f.score : ""))));
+      var meta = el("span", { "class": "fmeta" });
+      meta.appendChild(el("span", null, f.type)); meta.appendChild(el("span", null, f.confidence + (f.lane ? " · lane " + f.lane : "")));
+      var who = (f.personas || []).map(function (id) { return pName[id] || id; }); if (f.everyday) who.push("Everyday");
+      meta.appendChild(el("span", null, who.join(", "))); sum.appendChild(meta); card.appendChild(sum);
+      var body = el("div", { "class": "body" });
+      [["Where", f.where], ["What", f.what], ["Verify", f.verify], ["Repro", f.repro], ["Expected", f.expected ? f.expected + (f.oracle ? "  (oracle: " + f.oracle + ")" : "") : null], ["Actual", f.actual], ["Fix", f.fix], ["Done when", f.done_when], ["Blast radius", f.blast_radius]].forEach(function (r) {
+        if (!r[1]) return; var dl = el("dl", { "class": "row" }); dl.appendChild(el("dt", null, r[0])); dl.appendChild(el("dd", null, r[1])); body.appendChild(dl);
+      });
+      var cp = el("button", { "class": "ghost", type: "button" }, "Copy as work order"); cp.addEventListener("click", function () { copy(workOrder(f), "Copied " + f.id); });
+      body.appendChild(cp); card.appendChild(body); box.appendChild(card);
+    });
+  }
+
+  // Copy
+  var toastTimer;
+  function toast(msg) { var t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, 1800); }
+  function fallback(text, msg) { var ta = el("textarea"); ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select(); var ok = false; try { ok = document.execCommand("copy"); } catch (e) {} ta.remove(); toast(ok ? msg : "Select and copy manually"); }
+  function copy(text, msg) { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(function () { toast(msg); }, function () { fallback(text, msg); }); } else { fallback(text, msg); } }
+  $("copy-top").addEventListener("click", function () { var top = (D.findings || []).filter(function (f) { return f.severity === "Blocker" || f.severity === "High"; }); copy(top.map(workOrder).join("\n\n"), "Copied " + top.length + " work orders"); });
+  $("copy-shown").addEventListener("click", function () { var s = shown(); copy(s.map(workOrder).join("\n\n"), "Copied " + s.length + " work orders"); });
+  $("copy-ledger").addEventListener("click", function () { copy(D.ledger || "", "Copied ledger block"); });
+
+  // Reference sections
+  list("clean", D.clean); list("questions", D.questions); list("next", D.next_steps);
+  var seq = $("seq"); (D.fix_sequence || []).forEach(function (id) { var f = (D.findings || []).filter(function (x) { return x.id === id; })[0]; seq.appendChild(el("li", null, id + (f ? ": " + f.title : ""))); });
+  if (!(D.fix_sequence || []).length) seq.appendChild(el("li", null, "None."));
+  $("ledger").textContent = D.ledger || "";
+
+  // Break-point charts (load on a doubling scale, seconds on y, 10 s line)
+  var bp = $("bp");
+  (D.break_points || []).forEach(function (b) {
+    var card = el("div", { "class": "bp" }); card.appendChild(el("h3", null, b.action)); card.appendChild(el("span", { "class": "count" }, b.limit || ""));
+    var pts = b.curve || []; if (!pts.length) { bp.appendChild(card); return; }
+    var W = 320, H = 150, L = 36, R = 10, T = 10, B = 26;
+    var xs = pts.map(function (p) { return Math.log(p[0]) / Math.LN2; }), x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs);
+    var yMax = Math.max(12, Math.max.apply(null, pts.map(function (p) { return p[1]; })) * 1.1);
+    function X(v) { return L + (x1 === x0 ? 0 : (Math.log(v) / Math.LN2 - x0) / (x1 - x0)) * (W - L - R); }
+    function Y(v) { return H - B - (v / yMax) * (H - T - B); }
+    var ns = "http://www.w3.org/2000/svg", svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H); svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", b.action + " time by load: " + pts.map(function (p) { return p[0] + " items " + p[1] + " s"; }).join(", "));
+    function add(tag, a) { var e = document.createElementNS(ns, tag); for (var k in a) { var v = String(a[k]); if (v.indexOf("var(") > -1 || v.indexOf("color-mix(") > -1) e.style.setProperty(k, v); else e.setAttribute(k, v); } svg.appendChild(e); return e; }
+    [0, Math.round(yMax / 2), Math.floor(yMax)].forEach(function (v) { add("line", { x1: L, x2: W - R, y1: Y(v), y2: Y(v), stroke: "var(--line)", "stroke-width": 1 }); var t = add("text", { x: L - 6, y: Y(v) + 4, "text-anchor": "end", "font-size": 10, fill: "var(--muted)", "font-family": "var(--font-mono)" }); t.textContent = v + "s"; });
+    add("line", { x1: L, x2: W - R, y1: Y(10), y2: Y(10), stroke: "var(--sev-high)", "stroke-dasharray": "4 3", "stroke-width": 1.2 });
+    var t10 = add("text", { x: W - R, y: Y(10) - 4, "text-anchor": "end", "font-size": 10, fill: "var(--sev-high)", "font-family": "var(--font-mono)" }); t10.textContent = "10 s";
+    var d = pts.map(function (p, i) { return (i ? "L" : "M") + X(p[0]).toFixed(1) + " " + Y(p[1]).toFixed(1); }).join(" ");
+    add("path", { d: d + " L" + X(pts[pts.length - 1][0]).toFixed(1) + " " + Y(0) + " L" + X(pts[0][0]).toFixed(1) + " " + Y(0) + " Z", fill: "color-mix(in srgb, var(--accent) 14%, transparent)", stroke: "none" });
+    add("path", { d: d, fill: "none", stroke: "var(--accent)", "stroke-width": 2 });
+    pts.forEach(function (p, i) {
+      add("circle", { cx: X(p[0]), cy: Y(p[1]), r: i === pts.length - 1 ? 3.5 : 2.5, fill: p[1] > 10 ? "var(--sev-high)" : "var(--accent)" });
+      var lbl = add("text", { x: X(p[0]), y: H - 8, "text-anchor": i === 0 ? "start" : (i === pts.length - 1 ? "end" : "middle"), "font-size": 10, fill: "var(--muted)", "font-family": "var(--font-mono)" }); lbl.textContent = p[0];
+    });
+    card.appendChild(svg); bp.appendChild(card);
+  });
+  if (!(D.break_points || []).length) bp.appendChild(el("p", { "class": "count" }, "No break-point ramp in this run."));
+
+  // Enhancements by effort
+  var enhBox = $("enh");
+  ["S", "M", "L", "Overhaul"].forEach(function (e) {
+    var items = (D.findings || []).filter(function (f) { return f.type === "Enhancement" && f.effort === e; });
+    if (!items.length) return;
+    var g = el("div", { "class": "enh-group" }); g.appendChild(el("h3", null, { S: "Small", M: "Medium", L: "Large", Overhaul: "Overhaul" }[e]));
+    var ul = el("ul", { "class": "plain" }); items.forEach(function (f) { ul.appendChild(el("li", null, f.id + ": " + f.title + " (value " + f.value + ")")); });
+    g.appendChild(ul); enhBox.appendChild(g);
+  });
+  if (!enhBox.children.length) enhBox.appendChild(el("p", { "class": "count" }, "No enhancements logged."));
+
+  render();
+})();
+</script>

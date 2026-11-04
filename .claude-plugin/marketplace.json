@@ -1,0 +1,93 @@
+{
+  "name": "mastertools-stable",
+  "owner": {
+    "name": "Master Tools"
+  },
+  "description": "Master Tools: a shared core for Claude Code plus modules you switch on by need.",
+  "plugins": [
+    {
+      "name": "mastertools-core",
+      "source": "./plugins/mastertools-core",
+      "description": "The Master Tools core: always-on working rules and model routing, rendered from the user's profile at every session start; the sequence build method; capability checks before saying no; routed helper agents; compaction safety hooks.",
+      "version": "0.1.2"
+    },
+    {
+      "name": "mastertools-after-effects",
+      "source": "./plugins/mastertools-after-effects",
+      "description": "After Effects module for Master Tools.",
+      "version": "0.1.3"
+    },
+    {
+      "name": "mastertools-c4d-redshift",
+      "source": "./plugins/mastertools-c4d-redshift",
+      "description": "Cinema 4D, Redshift and shot polish module for Master Tools.",
+      "version": "0.1.3"
+    },
+    {
+      "name": "mastertools-career",
+      "source": "./plugins/mastertools-career",
+      "description": "Career for motion designers module for Master Tools.",
+      "version": "0.1.3"
+    },
+    {
+      "name": "mastertools-developer",
+      "source": "./plugins/mastertools-developer",
+      "description": "Claude API developer module for Master Tools.",
+      "version": "0.1.2"
+    },
+    {
+      "name": "mastertools-frames",
+      "source": "./plugins/mastertools-frames",
+      "description": "Frames and layout module for Master Tools.",
+      "version": "0.1.3"
+    },
+    {
+      "name": "mastertools-leadership",
+      "source": "./plugins/mastertools-leadership",
+      "description": "Leadership module for Master Tools.",
+      "version": "0.1.2"
+    },
+    {
+      "name": "mastertools-ledgers",
+      "source": "./plugins/mastertools-ledgers",
+      "description": "Time log module for Master Tools.",
+      "version": "0.1.2"
+    },
+    {
+      "name": "mastertools-motion-craft",
+      "source": "./plugins/mastertools-motion-craft",
+      "description": "Motion craft module for Master Tools.",
+      "version": "0.1.2"
+    },
+    {
+      "name": "mastertools-photoshop-uxp",
+      "source": "./plugins/mastertools-photoshop-uxp",
+      "description": "Photoshop and Adobe plugins module for Master Tools.",
+      "version": "0.1.2"
+    },
+    {
+      "name": "mastertools-plan-review",
+      "source": "./plugins/mastertools-plan-review",
+      "description": "Plan and review module for Master Tools.",
+      "version": "0.1.3"
+    },
+    {
+      "name": "mastertools-threads",
+      "source": "./plugins/mastertools-threads",
+      "description": "Threads and handoff module for Master Tools.",
+      "version": "0.1.2"
+    },
+    {
+      "name": "mastertools-ui-design",
+      "source": "./plugins/mastertools-ui-design",
+      "description": "UI design module for Master Tools.",
+      "version": "0.1.3"
+    },
+    {
+      "name": "mastertools-writing",
+      "source": "./plugins/mastertools-writing",
+      "description": "Writing module for Master Tools.",
+      "version": "0.1.2"
+    }
+  ]
+}

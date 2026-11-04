@@ -1,0 +1,19 @@
+{
+  "description": "threads: say when a thread's handoff folder changed elsewhere; refresh its auto-backup after a turn (off until ~/.config/handoff/auto exists).",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {"type": "command", "command": "python3 -I \"${CLAUDE_PLUGIN_ROOT}/skills/handoff/scripts/handoff_notice.py\"", "timeout": 10}
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {"type": "command", "command": "python3 -I \"${CLAUDE_PLUGIN_ROOT}/skills/handoff/scripts/handoff_auto.py\"", "async": true, "timeout": 300}
+        ]
+      }
+    ]
+  }
+}

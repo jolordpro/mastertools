@@ -1,0 +1,23 @@
+{
+  "skill_name": "design-taste",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design the search results page with filters for a vacation rental site I'm building.",
+      "expected_output": "Presents a Proven option drawn from patterns.md (chip row for top filters, panel with histogram price slider and a live-count apply button, text-link reset, empty state that names the cause with a one-tap fix), a Fit option, optionally a Stretch. Each labelled with a dial position and the products that informed it (Airbnb, Redfin, Booking.com). Says the profile is in training. Runs or names the function checks. No borrowed brand styling.",
+      "baseline_note": "Plain frontend-design avoids conventions and tends to invent a distinctive filter UI with no live count and no empty-state fix."
+    },
+    {
+      "id": 2,
+      "prompt": "I picked the sidebar filters over the panel for the admin tool, it's faster for power users. Log it.",
+      "expected_output": "Runs scripts/log_choice.py with context dashboard, job search + filters, attribute 'filter panel vs sidebar', picked sidebar, dial 1 or 2, source shown, why 'faster for power users'. No client names or data.",
+      "baseline_note": "Without the skill there is no decision log; the choice is lost."
+    },
+    {
+      "id": 3,
+      "prompt": "Make the sign-in screen for my habit tracker app. Keep it at dial 1.",
+      "expected_output": "One identifier-first door ('Log in or sign up' style), one field, Continue at 48 px or more, social sign-in as secondary below (canon 8, Airbnb and Uber). Touch targets 44 pt or more, AA contrast, checked by scripts/check.mjs. Near-black text is allowed (canon 12) even though frontend-design lists tinted near-black as a tell.",
+      "baseline_note": "Plain frontend-design would push for a distinctive look and may split sign-in and sign-up."
+    }
+  ]
+}

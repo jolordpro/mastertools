@@ -1,0 +1,33 @@
+# Materials and texture (MAT)
+
+Taught in: SOM Substance Painter for Motion Designers (EJ Hassenfratz) · SOM Scratches scene file · Gnomon Look Development, Texturing & Shading · Vallecilla Vol. 2 · SCAD ANIM 725, VFX 311, VFX 425.
+
+## Read
+- **F:** Uniform sheen; whether it reads as metal or dielectric.
+- **C:** Roughness variation, imperfection scale, tiling, glass edges.
+- **R:** Roughness constants across materials; metalness values; coat, anisotropy, sheen; bump, normal or displacement present; texture resolution against screen coverage; thin or solid glass.
+
+## Moves
+| ID | If you see | Try | Why | Lbl | Src | Rung | → |
+|---|---|---|---|---|---|---|---|
+| MAT-01 | Uniform gloss | Low-contrast breakup in roughness only | Variation reads as real | P | VAL2; GNM-LD | C→S | RS |
+| MAT-02 | A CG-clean hero | Wear on edges, smudges where hands touch, dust in crevices, scaled to the shot | Imperfection reads as real | P | SOM-SCR | C→S | RS |
+| MAT-03 | Metal with a diffuse or colored base | No diffuse on metal; color it through its specular | The metallic model has no diffuse component | V | BUR12 | FIX | RS |
+| MAT-04 | Colored speculars on plastic or paint | Keep the dielectric specular achromatic | Spec tint is an artistic concession, not physics | V | BUR12 | FIX | RS |
+| MAT-05 | Brushed metal reads as plastic | Anisotropic highlight along the brush direction | Anisotropy sets the highlight's aspect ratio | V/D | BUR12 | C→S | RS |
+| MAT-06 | Paint or lacquer with no depth | Add a clearcoat lobe | A second specular lobe | V | BUR12 | C→S | RS |
+| MAT-07 | Jersey or cloth reads as plastic | Sheen lobe plus a weave normal | Sheen is meant for cloth | V/D | BUR12 | C→S | RS |
+| MAT-08 | Glass reads like cellophane | Choose thin or solid shading on purpose; give solid glass real thickness | Thin-surface and solid transmission behave differently | V/P | BUR15 | FIX | RS |
+| MAT-09 | Partial metalness on clean metal | Metalness 0 or 1; blend only for transitions such as dirt on metal | The 0–1 blend is a transition tool | D | BUR12 | FIX | RS |
+| MAT-10 | Visible tiling | A second scale, a triplanar blend, or a variation mask | Repetition reads as CG | P | GNM-LD | FIX | RS |
+| MAT-11 | Same detail in wide and close shots | Micro-detail only where the camera gets close | Spend detail where it's seen | P | — | C→S | — |
+| MAT-12 | Stock material on a hero | Rebuild it from photo reference of the real surface | Reference beats memory | P | VAL2 | C→S | — |
+| MAT-13 | Streaks, smears or uneven lines on a camera-facing hero surface (side wall, band, bevel) in a 4x crop | Fine, even micro-texture (pebble grain, tight weave or fine brushed lines) a few px per repeat at delivery size, UVs running along the band so scale holds front to back, semi-gloss sheen. If the lines are in the raw render, fix material/UVs, not the grade | Art director's note: "it should be a texture but polished" (2026-10-28) | A | AD-1028 | FIX | RS |
+| MAT-14 | Square or blocky patches of a second texture (snow, rime, moss, dirt) on an organic surface such as rock or ice; hard straight edges that follow polygons | Find how the second material is placed. If it is chosen per face (by normal, a face selection, or a slab overlapping the surface), every polygon flips whole and shows its outline. Blend by a soft mask instead (noise or vertex map, feathered), and check faces pointing down: an "up-facing" test that uses the absolute normal also catches undersides. Where the material should gather (snow at a base), build it as its own soft-edged form in front, with the host surface showing behind | The art director spotted these, the critique didn't. Per-face placement on a low-poly mesh draws the mesh (AD-1030) | A | AD-1030 | FIX | RS |
+| MAT-15 | Surface texture whose patches are as big as the hero's details (frost blotches the size of a logo letter) | Size the repeat against the smallest hero detail in frame: patches well under the letter stroke width. On a cubic or triplanar projection, cut the tile size (one measured scene: 180 to 70 cm). 4x crop to judge | Big patches compete with the mark and read as a stamped pattern, not frost (AD-1030) | A | AD-1030 | FIX | RS |
+| MAT-16 | Thin parts of a clear or scattering solid (letters, inlays, thin ribs) render dark while thick parts glow | Thin parts give light too little path to scatter, so clear ice shows the dark behind it. Give thin parts their own lower transmission weight so the white base shows, keep the glossy skin. Test on the lookdev set before the scene | One measured scene, round 2: letters at full transmission went dark | T | AD-1030 | FIX | RS |
+| MAT-17 | Note asks for "frosted", "X% see-through" or "less opaque" | Treat the percent as a look, not a slider value. Transmission weight does not map to perceived see-through: a thick, dense-scatter body reads solid well before the weight reaches 0. Bracket three values and judge by what shows through against the neighbours. The brightest value must stay where it was (letters over body) | One measured scene, round 2: weight 0.15 for "~15% see-through" went solid white and outranked the letters | T | AD-1030 | FIX | RS |
+| MAT-18 | A material or model about to be built from scratch (metal, glass, plastic, fabric, wood, stone, props) | When the user has an asset library (for example Greyscalegorilla or KitBash3D), search it first with the user's own library tools, load the best fit, then tune it. Name the asset and its path in the note. Build from scratch only when nothing fits or the library is the wrong look, and say which. On a hero, MAT-12 and MAT-13 still apply to the library material. Headless renders: save the scene first so it keeps library paths, then pre-convert the library's texture maps before rendering and confirm the first frame. Without that, Redshift 2027.0.1 in c4dpy hung converting library maps with no first frame (one measured run); with pre-converted maps the same scenes rendered with no conversions | A finished library asset starts from a tested look and saves build time | A | — | C→S | — |
+| MAT-S1 | Ice everywhere; a frozen world | Use ice as a restrained accent: scratches, frost at the boards, arena reflections | Avoid the ice cliché | A | ESPN-NHL | S→W | RS |
+| MAT-S2 | Trophy chrome reads flat | Anisotropy if brushed, plus reflection cards (LGT-04) | Highlight shape and placement | V/P | BUR12; GSG-PL | C→S | RS |
+| MAT-S3 | Turf, infield dirt, leather | OPEN for turf and dirt. Leather: a pebbled-leather piped-edge reference (AD-1028; photos in the user's overlay, when present) | — | A for leather | AD-1028 | — | — |

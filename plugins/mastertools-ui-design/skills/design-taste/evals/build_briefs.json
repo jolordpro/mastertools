@@ -1,0 +1,12 @@
+{
+ "note": "Blind build test. Freeze the briefs before any build. Made-up products only; none may appear in the user's test set (DT/test-set/). Run once the profile has passed its round checks. Three builds per brief: skill (full loop), frontend-design alone, frontend-design plus the one-liner below.",
+ "one_liner": "Fill in before any build: one line that sums up the top build rules in the user's taste profile.",
+ "briefs": [
+  {"id": "b1", "job": "docs-home", "brief": "The docs home for Ferrule, a command-line tool that keeps dotfiles in sync across a developer's machines. Areas: install, guides, CLI reference, config file, troubleshooting."},
+  {"id": "b2", "job": "docs-article", "brief": "Ferrule's 'Get started' article: install it, run the first sync, and check it worked. Include two short code blocks."},
+  {"id": "b3", "job": "homepage", "brief": "The homepage for Quillmate, a meeting-notes app for small design agencies. It records, writes the summary and files action items to the right project."},
+  {"id": "b4", "job": "product-page", "brief": "The product page for the Halden lamp, a dimmable aluminium desk lamp in three finishes, with a warm-to-cool light dial."},
+  {"id": "b5", "job": "settings-dashboard", "brief": "The account settings screen for Ledgerline, an invoicing web app for freelancers: profile, business details, payment methods, notifications, plan."},
+  {"id": "b6", "job": "app-flow", "brief": "The sign-in screen for Steadily, a habit-tracking phone app. New and returning people both start here."}
+ ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mastertools-threads",
+  "title": "Threads and handoff",
+  "question": "Long projects that run across sessions or accounts.",
+  "default_on": false,
+  "depends_on": [
+    "mastertools-core"
+  ],
+  "conflicts_with": [],
+  "skills": [
+    "handoff",
+    "handoff-resume"
+  ]
+}

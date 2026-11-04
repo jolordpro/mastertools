@@ -1,0 +1,9 @@
+{
+  "name": "mastertools-ui-design",
+  "version": "0.1.3",
+  "description": "UI design module for Master Tools.",
+  "license": "MIT",
+  "dependencies": [
+    "mastertools-core"
+  ]
+}

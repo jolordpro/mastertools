@@ -1,0 +1,13 @@
+{
+  "id": "mastertools-ledgers",
+  "title": "Time log",
+  "question": "A running log of the time Claude saves, with a timing block in each script Claude writes.",
+  "default_on": false,
+  "depends_on": [
+    "mastertools-core"
+  ],
+  "conflicts_with": [],
+  "skills": [
+    "timecard"
+  ]
+}

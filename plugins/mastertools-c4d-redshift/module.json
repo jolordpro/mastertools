@@ -1,0 +1,16 @@
+{
+  "id": "mastertools-c4d-redshift",
+  "title": "Cinema 4D, Redshift and shot polish",
+  "question": "Cinema 4D and Redshift rendering, polish notes on 3D and After Effects shots, and plans for comping CG into live footage.",
+  "default_on": false,
+  "depends_on": [
+    "mastertools-core"
+  ],
+  "conflicts_with": [],
+  "skills": [
+    "redshift",
+    "elevate",
+    "cg-knowledge",
+    "post-composite"
+  ]
+}

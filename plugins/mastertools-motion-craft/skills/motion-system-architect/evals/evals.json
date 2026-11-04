@@ -1,0 +1,33 @@
+{
+  "skill_name": "motion-system-architect",
+  "evals": [
+    {
+      "id": 1,
+      "name": "retro-document-broadcast-package",
+      "prompt": "I'm writing up a motion language for a case study. The raw material is a broadcast graphics package our team built in After Effects a couple of years ago: show open, a set of bumps and wipes, lower thirds in three tiers (talent, stat, breaking), and a season-launch stinger. It's all shipped and on air, I have the AE project files and the final renders but never wrote any rules down. I need to turn this into a documented motion system without pretending I designed it as a system from day one. Walk me through how you'd do it, and then start: propose the thesis, the verbs, and the structure of the documentation I'd publish, plus what you need from me.",
+      "expected_output": "Selects retro-document mode and confirms it. Labels the whole artifact as retro-documentation and uses observed / inferred / designed-now evidence labels. Proposes gathering and clustering the shipped pieces and measuring values from the AE files before naming anything. Presents the thesis as an interpretation of the existing work, derives 3-7 verbs from the package's actual behavior (not generic trend verbs), and lists unexplained work and gaps the package never faced (interruption/edit points, reduced motion, formats). Maps the portfolio structure to the role's asks (principles, patterns, timing and tokens, specifications, guidance) and the 12-document set, and asks the user for specific inputs (project files, comp names, tier map). Does not lead with millisecond values.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "ms-first-request-new-product",
+      "prompt": "We're a 12-person fintech startup shipping a budgeting app on web, iOS and Android. Our brand is calm, trustworthy, a little warm. We have zero motion rules right now and engineers are hard-coding transitions everywhere. Can you just give me a duration and easing scale in JSON tokens I can hand to the engineers today? Use whatever's standard.",
+      "expected_output": "Does not simply emit a scale. Briefly redirects to intent and a minimal thesis and a few verbs (asks or infers with stated assumptions: calm, trustworthy, warm, what it must never feel like), selects new-system mode, and sizes the work to a minimum viable language because the team is small. Then delivers DTCG 2025.10-style tokens with primitive, semantic, and component tiers, modes full/reduced/instant, reduced-motion strategies, status and version, and states that DTCG does not cover springs or stagger so those use extensions. Values are justified per tier by frequency and role, and cross-platform handling says shared semantics with native spring mapping. Runs the validator and reports the result, mentions a lint rule for raw values, and includes a short governance starter (lifecycle, exception path). Marks any numbers given before derivation as provisional.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "ai-assistant-state-motion",
+      "prompt": "Our product is an AI research assistant that can search the web, run code, and edit the user's documents on their behalf. Design the motion language for its states so people always know what it's doing and who changed what. Include how it behaves for people with reduced-motion settings and how we'd stop our own coding agents from inventing random animations for it. Output something I can put in the design system repo.",
+      "expected_output": "Selects ai-states mode and reads the AI-state reference. Builds the state inventory from the product's real capabilities (listening, interpreting, planning, tool use for search/code/document edits, partial, waiting, uncertain, complete, handoff, plus error/interrupted). Applies the agency map (user-caused vs agent-caused vs external) with distinct treatment, especially for document edits. Resolves intents to semantic tokens (AI expresses intent, system owns mechanics) in a table, defines loop policies with stops, and gives full/reduced/instant forms that keep meaning without relying on motion alone. Produces behavior cards or card-lite entries and a token file validated with the script, a context pack for coding agents, and a pipeline where agent output is a proposal reviewed before promotion. Refuses theatrical reasoning visuals, false-confidence completion, and content storms. Delivers files or repo-ready structure.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "broadcast-package-partner-handoff",
+      "prompt": "Our regional sports network is handing its After Effects graphics package to six partner stations next season. The package has a show open, bumps, replay wipes, lower thirds, a score bug, promo opens and end slates; some pieces come in a couple of colour versions and a few were cut for social. Nothing is written down and the partners will open the files without us. Document it as a system they can use, and tell me what you need from me.",
+      "expected_output": "Selects retro-document mode and labels the work as retro-documentation. Before naming verbs, inventories the package into element families (identity, segmentation, information, promotion, closing, plates, off-air) and asks for or proposes a variant matrix per family with explicit axes (colourway, style, aspect, tier, duration) and counts, plus the switch mechanism for each axis. Puts a dependencies page first (fonts and where to get them, third-party plugins with versions and which are paid, AE version and project settings). Proposes a partner guide order (touchstones, dependencies, colour, type, one page per family with what to edit and what not to touch, misuse). Separates invariants (grammar) from variables (dialects or modes), marks gaps the package never faced (vertical and square, long names and live data, co-branding) as designed-now, and names the toolkit maturity level. Asks for the project files and comp names rather than inventing values.",
+      "files": []
+    }
+  ]
+}

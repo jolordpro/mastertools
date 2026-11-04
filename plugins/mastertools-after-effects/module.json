@@ -1,0 +1,13 @@
+{
+  "id": "mastertools-after-effects",
+  "title": "After Effects",
+  "question": "Scripts, expressions or panels for After Effects, even small ones.",
+  "default_on": false,
+  "depends_on": [
+    "mastertools-core"
+  ],
+  "conflicts_with": [],
+  "skills": [
+    "after-effects-engineering"
+  ]
+}

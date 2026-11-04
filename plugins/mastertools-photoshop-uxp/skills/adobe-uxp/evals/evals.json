@@ -1,0 +1,26 @@
+{
+  "skill_name": "adobe-uxp",
+  "evals": [
+    {
+      "id": 0,
+      "name": "photoshop-jsx-launcher",
+      "prompt": "our old photoshop CEP panel stopped showing up in photoshop 2026. it just ran a few .jsx scripts from a dropbox folder. can you make a version that works in photoshop now? i'm not an admin on this mac.",
+      "expected_output": "A UXP plugin scaffolded with uxp_new.py (PS), localFileSystem fullAccess, running .jsx via batchPlay AdobeScriptAutomation Scripts inside executeAsModal through a try/catch wrapper that writes a result file (so no Photoshop error modal), installed with uxp_build.py --install (UPIA, version bumped), verified via the /private/tmp log and a receipt file, and no request for admin/developer mode.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "after-effects-uxp-request",
+      "prompt": "adobe is moving everything to UXP so build me a UXP panel for after effects that lists my comps and lets me rename them.",
+      "expected_output": "States up front that After Effects refuses homemade UXP plugins (UPIA status -411 as of Oct 2026), offers or builds the ScriptUI/CEP version that works today, optionally keeps a UXP package in dist/ and explains how to re-test after AE updates. Does not claim the UXP panel will load in AE.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "update-not-showing",
+      "prompt": "i changed the css in my premiere uxp panel and reinstalled the ccx but premiere still shows the old layout, buttons are huge and cut off.",
+      "expected_output": "Identifies the same-version trap (UPIA keeps old files unless version bumps) and the need to restart Premiere; replaces native <button> with styled divs per ui-kit.md; runs uxp_check.py; rebuilds with uxp_build.py --install.",
+      "files": []
+    }
+  ]
+}

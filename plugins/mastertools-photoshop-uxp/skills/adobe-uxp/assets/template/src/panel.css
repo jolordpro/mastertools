@@ -1,0 +1,38 @@
+/* UXP-safe styles: flexbox only, no sticky/grid/::after, colour (not opacity) for disabled. See references/ui-kit.md. */
+:root {
+  --bg: var(--uxp-host-background-color, #232323);
+  --text: var(--uxp-host-text-color, #d6d6d6);
+  --line: var(--uxp-host-border-color, #3a3a3a);
+  --dim: #8e8e8e; --sel: #2d5a8a; --accent: #4a90d9; --warn: #e0a040; --bad: #e06060; --good: #6cbf6c;
+}
+body {
+  background-color: var(--bg); color: var(--text); margin: 0; padding: 0;
+  font-size: 12px; font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+  display: flex; flex-direction: column; height: 100vh; overflow: hidden;
+}
+.header { display: flex; flex-direction: row; align-items: center; padding: 6px; border-bottom: 1px solid var(--line); }
+.footer { display: block; padding: 6px; border-top: 1px solid var(--line); }
+.chip { padding: 2px 7px; border-radius: 9px; background-color: var(--accent); color: #ffffff; font-weight: bold; font-size: 11px; margin-right: 6px; }
+.title { font-weight: bold; }
+
+.btn {
+  display: flex; align-items: center; justify-content: center; height: 22px; padding: 0 8px;
+  color: var(--text); border: 1px solid var(--line); border-radius: 4px; font-size: 12px; white-space: nowrap; overflow: hidden;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background-color: var(--accent); border-color: var(--accent); color: #ffffff; font-weight: bold; }
+.btn.disabled { color: var(--dim); }
+.btn.primary.disabled { background-color: #3a4a5c; border-color: #3a4a5c; color: #9aa6b2; }
+.row { display: flex; flex-direction: row; width: 100%; }
+.row .btn { flex: 1; min-width: 0; margin-right: 6px; }
+.row .btn:last-child { margin-right: 0; }
+
+.list { flex: 1; overflow-y: auto; padding: 6px 0; }
+.item { display: flex; flex-direction: row; padding: 5px 8px; }
+.item:hover { background-color: rgba(128, 128, 128, 0.15); }
+.item.sel { background-color: var(--sel); color: #ffffff; }
+
+.status { display: block; margin-top: 6px; min-height: 16px; color: var(--dim); }
+.status.good { color: var(--good); }
+.status.bad { color: var(--bad); }
+.status.busy { color: var(--warn); }

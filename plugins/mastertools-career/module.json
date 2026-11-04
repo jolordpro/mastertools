@@ -1,0 +1,14 @@
+{
+  "id": "mastertools-career",
+  "title": "Career for motion designers",
+  "question": "A senior-level job hunt or portfolio audit as a motion designer.",
+  "default_on": false,
+  "depends_on": [
+    "mastertools-core"
+  ],
+  "conflicts_with": [],
+  "skills": [
+    "motion-design-career-strategist",
+    "motion-evidence-audit"
+  ]
+}

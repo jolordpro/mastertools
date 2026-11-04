@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>__NAME__</title>
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <!-- Plain divs on purpose: UXP mis-lays <header>/<footer> and native <button> ignores sizing (see references/ui-kit.md). -->
+  <div class="header">
+    <span id="app" class="chip">—</span>
+    <span class="title">__NAME__</span>
+  </div>
+
+  <div id="list" class="list"></div>
+
+  <div class="footer">
+    <div class="row">
+      <div id="test" class="btn primary" title="Write a receipt file to prove the plugin runs">Test</div>
+    </div>
+    <div id="status" class="status">Loading…</div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

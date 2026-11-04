@@ -1,0 +1,9 @@
+{
+  "name": "mastertools-writing",
+  "version": "0.1.2",
+  "description": "Writing module for Master Tools.",
+  "license": "MIT",
+  "dependencies": [
+    "mastertools-core"
+  ]
+}

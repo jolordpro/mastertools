@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: evidence-for-skill-edit
+expected_outcome: |
+  Searches the cards, runs the grade check on the ids it found, and splits them into evidence (V at medium or high, in date, no conflict) and to-verify, with the reason for each. Edits nothing.

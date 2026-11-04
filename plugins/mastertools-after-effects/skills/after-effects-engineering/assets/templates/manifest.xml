@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CEP manifest template for AE 2025/2026 (CSXS/manifest.xml).
+  - ExtensionBundleId is IMMUTABLE once shipped (changing it breaks the update chain). Pick it once.
+  - Bump ONLY ExtensionBundleVersion + Extension Version per release (strict semver, NO pre-release suffix —
+    a malformed version is silently rejected and the panel won't appear).
+  - DEFAULT for AE 25/26 on macOS Apple Silicon (proven in production): CSXS 9.0 + ExtensionManifest
+    Version="6.0" + the CEF node flags in the CEFCommandLine block below (enable-nodejs / mixed-context).
+    This is what reliably LOADS the panel on Apple Silicon — it is LOAD-BEARING, do NOT "modernize" it to
+    CSXS 12. (The AE 25/26 CEP runtime IS 12 and satisfies a 9.0 RequiredRuntime via backward-compat, but
+    declaring 12 has shown Apple-Silicon load failures.) Host range [0.0,99.9] installs on any AE version.
+  - Dev install: enable PlayerDebugMode under the HOST RUNTIME's CSXS key (AE 25/26 = CSXS 11/12), e.g.
+    `defaults write com.adobe.CSXS.12 PlayerDebugMode 1` — NOT .9, even though this manifest declares 9.0.
+  - <Geometry> MUST include <MaxSize> or the panel is locked to its default size and the user can't resize.
+-->
+<ExtensionManifest Version="6.0" ExtensionBundleId="com.yourco.yourapp" ExtensionBundleVersion="1.0.0"
+    ExtensionBundleName="YourApp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ExtensionList>
+    <Extension Id="com.yourco.yourapp" Version="1.0.0"/>
+  </ExtensionList>
+  <ExecutionEnvironment>
+    <HostList>
+      <!-- AEFT = After Effects. Wide range installs on any version; tighten if you depend on a newer API. -->
+      <Host Name="AEFT" Version="[0.0,99.9]"/>
+    </HostList>
+    <LocaleList><Locale Code="All"/></LocaleList>
+    <RequiredRuntimeList>
+      <RequiredRuntime Name="CSXS" Version="9.0"/>
+    </RequiredRuntimeList>
+  </ExecutionEnvironment>
+  <DispatchInfoList>
+    <Extension Id="com.yourco.yourapp">
+      <DispatchInfo>
+        <Resources>
+          <MainPath>./client/index.html</MainPath>
+          <ScriptPath>./host/index.jsx</ScriptPath>
+          <CEFCommandLine>
+            <Parameter>--enable-nodejs</Parameter>
+            <Parameter>--mixed-context</Parameter>
+          </CEFCommandLine>
+        </Resources>
+        <Lifecycle><AutoVisible>true</AutoVisible></Lifecycle>
+        <UI>
+          <Type>Panel</Type>
+          <Menu>YourApp</Menu>
+          <Geometry>
+            <Size><Height>320</Height><Width>240</Width></Size>
+            <MinSize><Height>120</Height><Width>180</Width></MinSize>
+            <MaxSize><Height>1200</Height><Width>800</Width></MaxSize>
+          </Geometry>
+        </UI>
+      </DispatchInfo>
+    </Extension>
+  </DispatchInfoList>
+</ExtensionManifest>

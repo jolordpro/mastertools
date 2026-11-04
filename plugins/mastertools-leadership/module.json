@@ -1,0 +1,17 @@
+{
+  "id": "mastertools-leadership",
+  "title": "Leadership",
+  "question": "Leading other leaders.",
+  "default_on": false,
+  "depends_on": [
+    "mastertools-core"
+  ],
+  "conflicts_with": [],
+  "skills": [
+    "leadership-coach",
+    "capacity-audit",
+    "cascade-diagnostic",
+    "containment-decision",
+    "judgment-drift-check"
+  ]
+}

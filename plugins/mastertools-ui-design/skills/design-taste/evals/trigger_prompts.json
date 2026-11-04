@@ -1,0 +1,12 @@
+[
+ {"id": "pos-settings", "expect": true, "prompt": "Design the account settings page for my invoicing web app."},
+ {"id": "pos-dial", "expect": true, "prompt": "Give me checkout screen options for my coffee subscription site, at dial 2."},
+ {"id": "pos-pick", "expect": true, "prompt": "I've got two dashboard layouts for my sales tracker, one dense table view and one card view. Which fits my taste better?"},
+ {"id": "pos-round", "expect": true, "prompt": "Run a taste round with me."},
+ {"id": "pos-landing", "expect": true, "prompt": "Build a landing page for a small bike repair shop in Burlington."},
+ {"id": "pos-improve", "expect": true, "prompt": "Improve my taste skill from what it has logged so far."},
+ {"id": "pos-docs", "expect": true, "prompt": "Build the docs home page for my open-source CLI tool."},
+ {"id": "neg-brand", "expect": false, "prompt": "Apply my company's brand guidelines (colours, fonts, logo rules) to my portfolio site."},
+ {"id": "neg-motion", "expect": false, "prompt": "Critique this easing for a modal open: cubic-bezier(.2,.8,.2,1) over 450ms. Why does it feel floaty?"},
+ {"id": "neg-code", "expect": false, "prompt": "Fix the off-by-one bug in my Python pagination function that skips the last page."}
+]

@@ -1,0 +1,285 @@
+<title>Taste Round 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one working column; pairs sit side by side (stacked on phones), the step bar stays on top. */
+:root {
+  --bg: #f4f5f7; --surface: #ffffff; --fg: #15181e; --muted: #5a6170; --line: #d8dce3;
+  --accent: #1f4fd1; --accent-soft: #e5ecfc; --pick: #1d7a4d; --pick-soft: #e2f3ea;
+  --font: "Public Sans", -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111317; --surface: #1a1d23; --fg: #e9ecf1; --muted: #9aa2b0; --line: #2c3139;
+    --accent: #8eaaff; --accent-soft: #212b47; --pick: #5ccb93; --pick-soft: #1b3326; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111317; --surface: #1a1d23; --fg: #e9ecf1; --muted: #9aa2b0; --line: #2c3139;
+  --accent: #8eaaff; --accent-soft: #212b47; --pick: #5ccb93; --pick-soft: #1b3326; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 16px/1.5 var(--font); padding-inline: 16px; padding-block: 0 64px; }
+.wrap { max-width: 1180px; margin-inline: auto; display: grid; gap: 20px; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2; background: var(--bg); padding-block: 14px 10px; display: grid; gap: 8px; border-bottom: 1px solid var(--line); }
+.bar-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.bar h1 { font-size: 1.05rem; margin: 0; font-weight: 700; }
+.steps { display: flex; gap: 14px; font-size: .88rem; color: var(--muted); flex-wrap: wrap; }
+.steps b { color: var(--fg); }
+.meter { height: 4px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0; background: var(--accent); }
+.save { font-size: .82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+h2 { font-size: 1.45rem; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.muted { color: var(--muted); }
+.small { font-size: .88rem; }
+.intro { display: grid; gap: 12px; padding-block: 24px 8px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.pair.phone { grid-template-columns: repeat(2, minmax(0, 300px)); justify-content: center; gap: 28px; }
+.side { appearance: none; border: 2px solid var(--line); border-radius: 10px; padding: 0; background: var(--surface); cursor: pointer; text-align: left; color: inherit; font: inherit; overflow: hidden; display: grid; min-width: 0; }
+.side img { width: 100%; max-width: 100%; display: block; aspect-ratio: 1100 / 688; object-fit: cover; object-position: top; }
+.pair.phone .side img { aspect-ratio: 390 / 844; }
+.side .tag { padding: 8px 12px; font-size: .85rem; color: var(--muted); display: flex; justify-content: space-between; }
+.side:hover { border-color: var(--muted); }
+.side.chosen { border-color: var(--pick); background: var(--pick-soft); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+kbd { font: inherit; font-size: .82rem; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 6px; background: var(--surface); }
+.btn { font: inherit; font-size: .95rem; font-weight: 600; border-radius: 8px; padding: 10px 16px; min-height: 44px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn:disabled { opacity: .45; cursor: default; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.seg { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+label.q { font-weight: 600; font-size: .95rem; }
+textarea { width: 100%; min-height: 64px; font: inherit; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); padding: 10px 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 14px; }
+.live { display: flex; gap: 10px; flex-wrap: wrap; }
+.live a { color: var(--accent); font-weight: 600; }
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.trio figure { margin: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); min-width: 0; }
+.trio img { width: 100%; max-width: 100%; aspect-ratio: 1100 / 688; object-fit: cover; object-position: top; display: block; }
+.trio figcaption { padding: 6px 10px; font-weight: 700; }
+table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 600; }
+.scroll { overflow-x: auto; }
+.agree { color: var(--pick); font-weight: 700; }
+pre { white-space: pre-wrap; word-break: break-word; font-size: .78rem; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px; max-height: 220px; overflow: auto; }
+@media (max-width: 720px) {
+  .pair, .trio { grid-template-columns: 1fr; }
+  .pair.phone { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+}
+@media (prefers-reduced-motion: no-preference) { .meter i { transition: width .2s; } .side { transition: border-color .12s, background .12s; } }
+</style>
+
+<div class="wrap">
+  <header class="bar">
+    <div class="bar-row">
+      <h1>Taste round 1</h1>
+      <span class="save" id="save" role="status">Not saved yet</span>
+    </div>
+    <div class="steps" id="steps"><span id="st-fast">Fast picks</span><span id="st-slow">Considered pairs</span><span id="st-grid">Three-way</span><span id="st-done">Results</span></div>
+    <div class="meter"><i id="meter"></i></div>
+  </header>
+
+  <section id="v-intro" class="intro">
+    <h2>About 12 minutes, three parts</h2>
+    <p>First, 28 fast picks: which of two screens you prefer. Go with your gut, no reasons. Then 4 pairs where you say why, and one three-way comparison. Each pair shows the same kind of page on the same device. Names are hidden until the end.</p>
+    <p class="muted small">Your answers save as you go. You can close the page and come back. My own picks stay hidden until you finish.</p>
+    <div class="row"><button class="btn primary" id="go">Start</button><span class="muted small">Then use <kbd>←</kbd> <kbd>→</kbd>. <kbd>Backspace</kbd> goes back one.</span></div>
+  </section>
+
+  <section id="v-fast" hidden>
+    <div class="row" style="justify-content:space-between"><p><b id="f-count"></b> <span class="muted" id="f-job"></span></p><button class="btn" id="f-back">Back</button></div>
+    <div class="pair" id="f-pair" style="margin-top:12px">
+      <button class="side" id="fa"><img alt="Option A"><span class="tag"><span>A</span><kbd>←</kbd></span></button>
+      <button class="side" id="fb"><img alt="Option B"><span class="tag"><span>B</span><kbd>→</kbd></span></button>
+    </div>
+  </section>
+
+  <section id="v-slow" hidden>
+    <div class="panel">
+      <div class="row" style="justify-content:space-between"><b id="s-count"></b><span class="muted small" id="s-job"></span></div>
+      <p id="s-note"></p>
+      <div class="live" id="s-live" hidden></div>
+      <div class="pair" id="s-pair">
+        <figure class="side" style="cursor:default"><img alt="Option A"><span class="tag"><span>A</span></span></figure>
+        <figure class="side" style="cursor:default"><img alt="Option B"><span class="tag"><span>B</span></span></figure>
+      </div>
+      <div role="group" aria-labelledby="q-which" style="display:grid;gap:8px"><label class="q" id="q-which">Which would you ship?</label>
+        <div class="seg" id="s-choice"><button class="btn" data-v="A">A</button><button class="btn" data-v="B">B</button><button class="btn" data-v="both">Both work</button><button class="btn" data-v="neither">Neither</button><button class="btn" data-v="depends">Depends</button></div></div>
+      <div role="group" aria-labelledby="q-how" style="display:grid;gap:8px"><label class="q" id="q-how">How strongly?</label>
+        <div class="seg" id="s-strength"><button class="btn" data-v="slight">Slight</button><button class="btn" data-v="strong">Strong</button></div></div>
+      <div style="display:grid;gap:8px"><label class="q" for="s-why">Why, in a few words</label><textarea id="s-why"></textarea></div>
+      <div class="row"><button class="btn" id="s-back">Back</button><button class="btn primary" id="s-next" disabled>Next</button></div>
+    </div>
+  </section>
+
+  <section id="v-grid" hidden>
+    <div class="panel">
+      <b>Three-way comparison</b>
+      <p class="muted small">Three finance homepages. Include your neutral reactions too.</p>
+      <div class="trio" id="g-trio"></div>
+      <div role="group" aria-labelledby="q-alike" style="display:grid;gap:8px"><label class="q" id="q-alike">Which two are most alike?</label>
+        <div class="seg" id="g-pair"><button class="btn" data-v="1+2">1 and 2</button><button class="btn" data-v="1+3">1 and 3</button><button class="btn" data-v="2+3">2 and 3</button></div></div>
+      <div style="display:grid;gap:8px"><label class="q" for="g-diff">How is the third one different?</label><textarea id="g-diff"></textarea></div>
+      <div style="display:grid;gap:8px"><label class="q" for="g-why1">Why does that difference matter?</label><textarea id="g-why1"></textarea></div>
+      <div style="display:grid;gap:8px"><label class="q" for="g-why2">And why does that matter?</label><textarea id="g-why2"></textarea></div>
+      <div class="row"><button class="btn" id="g-back">Back</button><button class="btn primary" id="g-next" disabled>Finish</button></div>
+    </div>
+  </section>
+
+  <section id="v-done" hidden>
+    <div class="intro">
+      <h2>Done. Thank you.</h2>
+      <p id="d-status"></p>
+      <p class="muted small">Below: the names, your pick and mine, with my reason. Tell Claude in chat that you've finished.</p>
+    </div>
+    <div class="scroll panel"><table><thead><tr><th>Pair</th><th>A</th><th>B</th><th>You</th><th>Claude</th><th>Claude's reason</th></tr></thead><tbody id="d-rows"></tbody></table></div>
+    <div class="panel" id="d-copy" hidden>
+      <b>Saving didn't work in this view</b>
+      <p class="small">Copy your answers and paste them into the chat.</p>
+      <div class="row"><button class="btn primary" id="copy">Copy my answers</button><span class="small muted" id="copied" role="status"></span></div>
+      <pre id="dump"></pre>
+    </div>
+  </section>
+</div>
+
+<script>
+const R = /*ROUND*/null;
+const DOC = "answers/round-1";
+const fastIds = R.order, slowIds = R.slow;
+const img = (id) => `img/${id}.jpg`;
+const isPhone = (p) => R.phone.includes(p.A) && R.phone.includes(p.B);
+let S = { round: "round-1", started_at: null, updated_at: null, fast: {}, slow: {}, grid: {}, done: false };
+let view = "intro", fi = 0, si = 0, shownAt = 0, db = null, saveTimer = null;
+
+const $ = (id) => document.getElementById(id);
+function show(v) {
+  view = v;
+  for (const k of ["intro", "fast", "slow", "grid", "done"]) $("v-" + k).hidden = k !== v;
+  for (const k of ["fast", "slow", "grid", "done"]) {
+    const el = $("st-" + k);
+    el.innerHTML = k === v ? `<b>${el.textContent}</b>` : el.textContent;
+  }
+  const total = fastIds.length + slowIds.length + 1;
+  const doneN = Object.keys(S.fast).length + Object.keys(S.slow).filter(k => S.slow[k].choice).length + (S.grid.pair ? 1 : 0);
+  $("meter").style.width = Math.round(100 * doneN / total) + "%";
+  window.scrollTo(0, 0);
+}
+function setStatus(t) { $("save").textContent = t; }
+function save() {
+  S.updated_at = new Date().toISOString();
+  clearTimeout(saveTimer);
+  if (!db) { setStatus("Not saving in this view"); return; }
+  setStatus("Saving…");
+  saveTimer = setTimeout(async () => {
+    try { await db.doc(DOC).set(JSON.parse(JSON.stringify(S))); setStatus("Saved " + new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })); }
+    catch (e) {
+      if (e && e.code === "unavailable") { setTimeout(save, 800 + Math.random() * 800); return; }
+      db = null; setStatus("Can't save here. You'll get a copy button at the end.");
+    }
+  }, 500);
+}
+
+function renderFast() {
+  const id = fastIds[fi], p = R.pairs[id];
+  $("f-count").textContent = `${fi + 1} of ${fastIds.length}`;
+  $("f-job").textContent = `${p.job}, ${p.device}`;
+  $("f-pair").className = "pair" + (isPhone(p) ? " phone" : "");
+  for (const [el, w] of [[$("fa"), p.A], [$("fb"), p.B]]) { el.classList.remove("chosen"); el.querySelector("img").src = img(w); }
+  const prev = S.fast[id];
+  if (prev) (prev.pick === "A" ? $("fa") : $("fb")).classList.add("chosen");
+  $("f-back").disabled = fi === 0;
+  shownAt = performance.now();
+  const n = fastIds[fi + 1]; if (n) { new Image().src = img(R.pairs[n].A); new Image().src = img(R.pairs[n].B); }
+}
+let busy = false;
+function pickFast(side) {
+  if (busy) return; busy = true;
+  const id = fastIds[fi];
+  S.fast[id] = { pick: side, ms: Math.round(performance.now() - shownAt) };
+  (side === "A" ? $("fa") : $("fb")).classList.add("chosen");
+  save();
+  setTimeout(() => { busy = false; fi++; if (fi < fastIds.length) { renderFast(); show("fast"); } else { si = 0; renderSlow(); show("slow"); } }, 180);
+}
+
+function pressed(group, v) { for (const b of $(group).querySelectorAll("button")) b.setAttribute("aria-pressed", b.dataset.v === v ? "true" : "false"); }
+function renderSlow() {
+  const id = slowIds[si], p = R.pairs[id], a = S.slow[id] || {};
+  $("s-count").textContent = `Considered pair ${si + 1} of ${slowIds.length}`;
+  $("s-job").textContent = `${p.job}, ${p.device}`;
+  $("s-note").textContent = p.note || "";
+  const live = p.device.includes("live");
+  $("s-live").hidden = !live;
+  $("s-live").innerHTML = live ? `<a href="${R.live[p.A]}" target="_blank" rel="noopener">Open A live</a><a href="${R.live[p.B]}" target="_blank" rel="noopener">Open B live</a>` : "";
+  $("s-pair").className = "pair" + (isPhone(p) ? " phone" : "");
+  const imgs = $("s-pair").querySelectorAll("img"); imgs[0].src = img(p.A); imgs[1].src = img(p.B);
+  pressed("s-choice", a.choice); pressed("s-strength", a.strength);
+  $("s-why").value = a.why || "";
+  $("s-next").disabled = !a.choice;
+  $("s-next").textContent = si === slowIds.length - 1 ? "Next: three-way" : "Next";
+}
+function slowSet(k, v) { const id = slowIds[si]; S.slow[id] = { ...(S.slow[id] || {}), [k]: v }; if (k !== "why") renderSlow(); save(); }
+
+function renderGrid() {
+  $("g-trio").innerHTML = R.grid.works.map((w, i) => `<figure><img src="${img(w)}" alt="Homepage ${i + 1}"><figcaption>${i + 1}</figcaption></figure>`).join("");
+  pressed("g-pair", S.grid.pair);
+  $("g-diff").value = S.grid.diff || ""; $("g-why1").value = S.grid.why1 || ""; $("g-why2").value = S.grid.why2 || "";
+  $("g-next").disabled = !S.grid.pair;
+}
+
+function renderDone() {
+  const label = (id) => id.startsWith("F") ? "Fast " + id.slice(1) : id.startsWith("R") ? "Repeat of " + R.pairs[id].repeat_of : id.startsWith("S") ? "Considered " + id.slice(1) : id;
+  const rows = [...fastIds, ...slowIds].map((id) => {
+    const p = R.pairs[id], you = id.startsWith("S") ? (S.slow[id] || {}).choice : (S.fast[id] || {}).pick;
+    const agree = you && you === p.claude.pick;
+    return `<tr><td>${id}</td><td>${R.names[p.A]}</td><td>${R.names[p.B]}</td><td>${you || "–"}</td><td class="${agree ? "agree" : ""}">${p.claude.pick}</td><td>${p.claude.why}</td></tr>`;
+  });
+  $("d-rows").innerHTML = rows.join("");
+  const n = fastIds.filter(id => S.fast[id] && S.fast[id].pick === R.pairs[id].claude.pick).length;
+  $("d-status").textContent = `You and Claude agreed on ${n} of ${fastIds.length} fast picks. ${db ? "Your answers are saved." : ""}`;
+  $("d-copy").hidden = !!db;
+  $("dump").textContent = JSON.stringify(S);
+}
+
+$("go").onclick = () => { S.started_at = S.started_at || new Date().toISOString(); fi = Math.min(Object.keys(S.fast).length, fastIds.length - 1); renderFast(); show("fast"); };
+$("fa").onclick = () => pickFast("A");
+$("fb").onclick = () => pickFast("B");
+$("f-back").onclick = () => { if (fi > 0) { fi--; renderFast(); } };
+document.addEventListener("keydown", (e) => {
+  if (view !== "fast" || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === "ArrowLeft") { e.preventDefault(); pickFast("A"); }
+  if (e.key === "ArrowRight") { e.preventDefault(); pickFast("B"); }
+  if (e.key === "Backspace" && fi > 0) { e.preventDefault(); fi--; renderFast(); }
+});
+$("s-choice").onclick = (e) => { if (e.target.dataset.v) slowSet("choice", e.target.dataset.v); };
+$("s-strength").onclick = (e) => { if (e.target.dataset.v) slowSet("strength", e.target.dataset.v); };
+$("s-why").oninput = (e) => slowSet("why", e.target.value);
+$("s-back").onclick = () => { if (si > 0) { si--; renderSlow(); } else { fi = fastIds.length - 1; renderFast(); show("fast"); } };
+$("s-next").onclick = () => { if (si < slowIds.length - 1) { si++; renderSlow(); window.scrollTo(0, 0); } else { renderGrid(); show("grid"); } };
+$("g-pair").onclick = (e) => { if (e.target.dataset.v) { S.grid.pair = e.target.dataset.v; renderGrid(); save(); } };
+for (const k of ["diff", "why1", "why2"]) $("g-" + k).oninput = (e) => { S.grid[k] = e.target.value; save(); };
+$("g-back").onclick = () => { si = slowIds.length - 1; renderSlow(); show("slow"); };
+$("g-next").onclick = () => { S.done = true; S.grid.works = R.grid.works; save(); renderDone(); show("done"); };
+$("copy").onclick = async () => {
+  try { await navigator.clipboard.writeText(JSON.stringify(S)); $("copied").textContent = "Copied. Paste it into the chat."; }
+  catch { const r = document.createRange(); r.selectNodeContents($("dump")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); $("copied").textContent = "Selected. Press Cmd+C."; }
+};
+
+show("intro");
+(async () => {
+  try { db = await window.claude?.use("db"); } catch { db = null; }
+  if (!db) { setStatus("Saving is off in this view. You'll get a copy button at the end."); return; }
+  try {
+    const snap = await db.doc(DOC).get();
+    if (snap.exists) {
+      S = { ...S, ...JSON.parse(JSON.stringify(snap.data())) };
+      setStatus("Saved answers loaded");
+      if (S.done) { renderDone(); show("done"); }
+      else if (Object.keys(S.fast).length) $("go").textContent = "Continue where you left off";
+    } else setStatus("Ready. Answers save as you go.");
+  } catch { setStatus("Ready. Answers save as you go."); }
+})();
+</script>

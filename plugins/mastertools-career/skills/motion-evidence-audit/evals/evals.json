@@ -1,0 +1,32 @@
+{
+  "skill_name": "motion-evidence-audit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Here's the Featured case study from my portfolio for a Staff Motion Designer role at a big consumer app company. I led the motion system for our mobile app: I defined easing and duration tokens, worked closely with engineering to ship them, and it was adopted across the product. We saw a big improvement in consistency and engagement. Is this Staff-level? Here's the full write-up: [pasted 600-word case study with 4 screenshots and two looping GIFs of button and sheet transitions, no spec, no token table, no mention of reduced motion, no numbers].",
+      "expected_output": "Verdict that the evidence is claim-heavy (confidence C/D) and not yet Staff-callable; D3/D5/D7/D8 mostly U or capped; gates marked not tested; red flags citing role, system and adoption inflation; work orders from the artifact library; rewrites with CONFIRM slots and no invented metrics.",
+      "files": [],
+      "expectations": []
+    },
+    {
+      "id": 2,
+      "prompt": "Audit my LinkedIn About and these four resume bullets against a Principal motion systems bar. Bullets: 1) Spearheaded a transformative organization-wide motion overhaul. 2) Built an After Effects plugin that saved the team hundreds of hours. 3) Partnered with engineering to ship delightful micro-interactions. 4) Championed accessibility-first motion. I'm targeting Principal Motion Designer at a platform company. Tell me what's missing and how to close it.",
+      "expected_output": "Claim-only surface: no total or band, claim triage instead; strip test and verb-to-evidence rewrites for each bullet with CONFIRM slots; nine work-history questions as next probes; ranked work orders with effort and role types; Principal gates reported as not tested rather than failed.",
+      "files": [],
+      "expectations": []
+    },
+    {
+      "id": 3,
+      "prompt": "Score my current site and resume against the creative-leadership mode for a Head of Creative role, and rewrite my top three resume bullets. My facts file is attached: only the rows marked verified are confirmed. Tell me where the evidence is thin.",
+      "expected_output": "Reads the facts file first; uses only verified rows and respects any venue limits; writes CONFIRM for any missing number; uses creative-leadership weights and notes where the corpus is thin on people leadership; rewrites keep the user's voice and invent no metrics.",
+      "files": [],
+      "expectations": []
+    },
+    {
+      "id": 4,
+      "prompt": "Audit my portfolio for this posting: 'Senior Motion Designer, Live Events (streaming service). Must have: 8+ years across 2D and 3D motion; designing broadcast graphics packages for live events; building After Effects toolkits and templates others use; render pipelines, finishing and delivery for live broadcast. Nice to have: Cinema 4D, real-time graphics (Vizrt, Unreal). Traits: directs a look under pressure, organised files.' My site has a 2:40 reel that opens with 20 s of logo builds, three broadcast package case pages (show open, lower-thirds system, election night) with style frames but no delivery or file details, a page about an AE script panel I wrote that 14 editors at my network use daily, and a resume PDF built in two columns with the reel link as an icon. No product UI work, no tokens, no state machines.",
+      "expected_output": "Reads the posting into requirements with IDs (must-have, nice-to-have, traits) and maps each to proof on the site or a named gap. Uses a live or broadcast lens: does not mark the person down for missing product-UI states, tokens or state machines, and treats the AE panel with 14 daily users as strong evidence. Flags the reel: too long (aim 60-90 s) and the strongest 10-15 s are not first. Flags the missing delivery and file-discipline proof on the package pages (codec and alpha, frame rates, safe areas, real-time handoff, project structure). Flags the two-column resume and icon-only reel link as parsing risks and asks for full-text URLs. Leads with a plain verdict, ranks fixes, no scores unless asked.",
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,308 @@
+{
+ "_note": "Boards verified live 2026-10-16. Dropped (0 jobs or 404): greenhouse webflow/deel; ashby vercel/mercury/deel; lever plaid.",
+ "boards": [
+  {
+   "type": "greenhouse",
+   "token": "anthropic",
+   "company": "Anthropic",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "airbnb",
+   "company": "Airbnb",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "figma",
+   "company": "Figma",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "stripe",
+   "company": "Stripe",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "discord",
+   "company": "Discord",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "duolingo",
+   "company": "Duolingo",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "robinhood",
+   "company": "Robinhood",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "pinterest",
+   "company": "Pinterest",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "coinbase",
+   "company": "Coinbase",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "dropbox",
+   "company": "Dropbox",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "reddit",
+   "company": "Reddit",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "instacart",
+   "company": "Instacart",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "lyft",
+   "company": "Lyft",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "squarespace",
+   "company": "Squarespace",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "asana",
+   "company": "Asana",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "twitch",
+   "company": "Twitch",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "roblox",
+   "company": "Roblox",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "riotgames",
+   "company": "Riot Games",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "brex",
+   "company": "Brex",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "databricks",
+   "company": "Databricks",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "scaleai",
+   "company": "Scale AI",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "gitlab",
+   "company": "GitLab",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "peloton",
+   "company": "Peloton",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "calm",
+   "company": "Calm",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "vercel",
+   "company": "Vercel",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "mercury",
+   "company": "Mercury",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "greenhouse",
+   "token": "epicgames",
+   "company": "Epic Games",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "openai",
+   "company": "OpenAI",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "perplexity",
+   "company": "Perplexity",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "linear",
+   "company": "Linear",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "notion",
+   "company": "Notion",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "ramp",
+   "company": "Ramp",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "runway",
+   "company": "Runway",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "elevenlabs",
+   "company": "ElevenLabs",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "cursor",
+   "company": "Cursor (Anysphere)",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "replit",
+   "company": "Replit",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "character",
+   "company": "Character",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "suno",
+   "company": "Suno",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "pika",
+   "company": "Pika",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "plaid",
+   "company": "Plaid",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "webflow",
+   "company": "Webflow",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "ashby",
+   "token": "midjourney",
+   "company": "Midjourney",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "lever",
+   "token": "spotify",
+   "company": "Spotify",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "lever",
+   "token": "palantir",
+   "company": "Palantir",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "eightfold",
+   "host": "explore.jobs.netflix.net",
+   "domain": "netflix.com",
+   "company": "Netflix",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "workday",
+   "tenant": "adobe",
+   "wd": "wd5",
+   "site": "external_experienced",
+   "company": "Adobe",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "workday",
+   "tenant": "nvidia",
+   "wd": "wd5",
+   "site": "NVIDIAExternalCareerSite",
+   "company": "NVIDIA",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "workday",
+   "tenant": "salesforce",
+   "wd": "wd12",
+   "site": "External_Career_Site",
+   "company": "Salesforce",
+   "verified": "2026-10-16"
+  },
+  {
+   "type": "workday",
+   "tenant": "disney",
+   "wd": "wd5",
+   "site": "disneycareer",
+   "company": "Disney",
+   "verified": "2026-10-16"
+  }
+ ]
+}

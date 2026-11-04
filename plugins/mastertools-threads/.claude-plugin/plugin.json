@@ -1,0 +1,9 @@
+{
+  "name": "mastertools-threads",
+  "version": "0.1.2",
+  "description": "Threads and handoff module for Master Tools.",
+  "license": "MIT",
+  "dependencies": [
+    "mastertools-core"
+  ]
+}

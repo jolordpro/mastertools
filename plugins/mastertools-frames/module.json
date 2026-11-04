@@ -1,0 +1,13 @@
+{
+  "id": "mastertools-frames",
+  "title": "Frames and layout",
+  "question": "Notes on framing, layout and crops.",
+  "default_on": false,
+  "depends_on": [
+    "mastertools-core"
+  ],
+  "conflicts_with": [],
+  "skills": [
+    "composition"
+  ]
+}

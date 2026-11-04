@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: glass-noise-threshold
+expected_outcome: |
+  Searches the knowledge base first, opens the cards it uses, cites their ids with grades, and routes every Redshift value through the redshift skill's ledger (or says plainly that a value is not ledger-checked). Cards about other renderers are labelled as such.

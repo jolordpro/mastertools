@@ -1,0 +1,13 @@
+{
+  "id": "mastertools-ui-design",
+  "title": "UI design",
+  "question": "App and web screens, judged against a taste profile that grows from picks over time.",
+  "default_on": false,
+  "depends_on": [
+    "mastertools-core"
+  ],
+  "conflicts_with": [],
+  "skills": [
+    "design-taste"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mastertools-photoshop-uxp",
+  "title": "Photoshop and Adobe plugins",
+  "question": "Photoshop scripts, and UXP plugins for Photoshop, InDesign and Premiere Pro.",
+  "default_on": false,
+  "depends_on": [
+    "mastertools-core"
+  ],
+  "conflicts_with": [],
+  "skills": [
+    "photoshop-scripting",
+    "adobe-uxp"
+  ]
+}

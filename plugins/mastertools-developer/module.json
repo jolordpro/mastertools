@@ -1,0 +1,13 @@
+{
+  "id": "mastertools-developer",
+  "title": "Claude API developer",
+  "question": "Prompt caching checks for apps built on the Claude API.",
+  "default_on": false,
+  "depends_on": [
+    "mastertools-core"
+  ],
+  "conflicts_with": [],
+  "skills": [
+    "prompt-cache-audit"
+  ]
+}

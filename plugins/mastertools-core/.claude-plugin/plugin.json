@@ -1,0 +1,14 @@
+{
+  "name": "mastertools-core",
+  "version": "0.1.2",
+  "description": "The Master Tools core: always-on working rules and model routing, rendered from the user's profile at every session start; the sequence build method; capability checks before saying no; routed helper agents; compaction safety hooks.",
+  "license": "MIT",
+  "userConfig": {
+    "profile": {
+      "type": "file",
+      "title": "Profile",
+      "description": "Your profile file: name, pronouns, tech level, banned words, house rules. Start from profiles/EXAMPLE.md in Master Tools. Leave unset to use profile.md in your Claude config folder (~/.claude/profile.md by default); with no file the rules speak of \"the user\".",
+      "required": false
+    }
+  }
+}
