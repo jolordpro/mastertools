@@ -59,7 +59,7 @@ Studio and freelance income rarely reaches it except through studio margin, dire
 
 Use the person's own target. If they didn't give one, report the band and what it buys; don't assume $300K.
 
-For each candidate role, classify the target against the band or a sourced TC estimate: **clears** (the band's floor is at or above it), **inside** (it falls within the band), **stretch** (only the top of band reaches it) or **out**. Say it precisely: $300K against a $310K–$420K band clears it, it isn't "inside". Keep base and total comp apart. Use the remote truth from the text. A posted band that tops out below the target is out unless equity math says otherwise.
+For each candidate role, classify the target against the band or a sourced TC estimate: **clears** (the band's floor is at or above it), **inside** (it falls within the band), **stretch** (only the top of band reaches it) or **out**. Say it precisely: $300K against a $305K–$400K band clears it, it isn't "inside". Keep base and total comp apart. Use the remote truth from the text. A posted band that tops out below the target is out unless equity math says otherwise.
 
 Postings show base, so for equity payers estimate TC per level from single offers and build the map employer × level: who pays the target at Senior, and who only at Staff. For product and UI motion people this route is usually the main one.
 

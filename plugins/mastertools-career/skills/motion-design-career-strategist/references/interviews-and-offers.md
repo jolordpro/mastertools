@@ -18,7 +18,7 @@ Always ask the recruiter for the format, the interviewers' roles and how the rol
 | Streaming or entertainment (e.g. Netflix) | Recruiter → hiring manager → portfolio to a panel → several one-on-ones with creative, production and partners; culture probed throughout; references taken seriously | The panel, and culture fit stated in the company's own terms |
 | Studio or agency | Reel → creative director conversation → test or trial project, sometimes paid | The reel and the CD's read of taste |
 
-Netflix's posting for Senior Motion Designer, Live (2026) lists its own culture lines: radical selflessness, curiosity, nimble collaboration, mentorship, "we over me". Map stories to whatever lines the target posting names.
+Many postings list their own culture or values lines. Map stories to whatever lines the target posting names.
 
 ## 2. Mock panel protocol
 

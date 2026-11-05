@@ -53,7 +53,7 @@ Quick lookup:
 
 ## 1. Key conclusions
 
-1. The highest long-run ceiling is product/UI motion at big tech or AI labs, leveled Senior → Staff → Principal. Equity drives the gap. But $300K does not always require Staff: top-of-market cash payers can post it at Senior (Netflix, Senior Motion Designer, Live: $310K–$420K, salary only, remote US [VER 2026-10]).
+1. The highest long-run ceiling is product/UI motion at big tech or AI labs, leveled Senior → Staff → Principal. Equity drives the gap. But $300K does not always require Staff: top-of-market cash payers can post it at Senior (a remote US Senior motion posting in Oct 2026 had a salary-only band with a floor above $300K [VER 2026-10]).
 2. Leveling follows scope, not craft. Staff owns cross-team motion systems (principles, tokens, springs, Rive/Lottie pipelines) that ship in code.
 3. Top earners pair motion with a scarce second skill: code, systems, runtime, AI interaction, 3D/real-time, or creative direction (§5.2).
 4. The biggest single lever is being leveled at Staff or above. One big-tech level ≈ $80K–$200K+ TC per year.
@@ -177,7 +177,6 @@ Checked by live research on 2026-10-16/17; rows added 2026-10-17 come from the e
 | Data point | Figure | Source |
 |---|---|---|
 | Anthropic, Motion Designer, Core Brand | $260K–$305K base; US remote-friendly with ~25% office time (SF/NY); 6+ yrs. **Closed:** Anthropic's board listed no motion roles on 2026-10-17 | https://job-boards.greenhouse.io/anthropic/jobs/5116771008 |
-| Netflix, Senior Motion Designer, Live (JR42334) | $310,000–$420,000, salary only (no bonus; employee chooses salary vs stock options); Remote, US; 10+ yrs, AE + C4D, live broadcast; posted 2026-09-29 (internal created date 2026-08-26) | https://explore.jobs.netflix.net/careers/job/790318157691 |
 | OpenAI, Motion Designer, Business Marketing | $223K–$247K + equity; SF, hybrid 3 days/week (board's remote flag says otherwise); published 2026-10-14 | https://jobs.ashbyhq.com/openai/c1d765b3-182e-4874-8316-12ce509a7f9f |
 | Mercury, Staff Motion Designer - 3D | $170.4K–$236.7K; SF/NY/Portland or remote US/Canada; published 2026-09-16 | https://job-boards.greenhouse.io/mercury/jobs/6196208004 |
 | Adobe, Motion Graphics Designer / Animator | $94.9K–$209.6K; San Francisco; posted 2026-09-24 | https://adobe.wd5.myworkdayjobs.com/external_experienced/job/San-Francisco/Motion-Graphics-Designer--Animator_R172121 |
