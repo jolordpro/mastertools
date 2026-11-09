@@ -7,7 +7,9 @@ Usage:
   handoff_tree.py --tidy                                      move child folders inside their parent's folder
 Options: --create (make missing folders), --dir <handoff folder>
 
-Signals per thread: transcript size, compactions, last activity, children, fenced (regulated: nothing copied).
+Signals per thread: transcript size, compactions, last activity, children (session records plus thread folders
+nested inside its folder), fenced (regulated: nothing copied), private (full handoff in the project folder),
+and a warning when another Mac wrote the folder last. --create stamps the folder with this Mac's name.
 Mode per thread: WRITE (no handoff in its folder yet) or UPDATE (one exists: add a changelog entry, refresh the stale
 parts), with the --since value for handoff_extract.py so an update reads only what is new.
 """
@@ -15,7 +17,8 @@ import os, shutil, sys, time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from handoff_common import (account_label, age, changelog, fenced, find_transcript, folder_for, handoff_dir,  # noqa: E402
-                            id_folders, last_handoff, load_threads, read_ids, resolve, subtree, thread_folders)
+                            host_name, id_folders, last_handoff, load_threads, nested_children, other_host, private,
+                            private_folder, private_leftovers, read_ids, resolve, stamp_host, subtree, thread_folders)
 
 args = sys.argv[1:]
 
@@ -59,13 +62,31 @@ def line(tid, depth, known):
     tr = find_transcript(tid)
     size = f"{os.path.getsize(tr) / 1e6:.1f} MB, {compactions(tr)} compactions" if tr else "transcript not found"
     fence = fenced(t)
+    secret = private(t)
     folder = folder_for(root, threads, tid, create, known)
     pad = "  " * depth
     flags = " · ARCHIVED" if t["archived"] else ""
     flags += f" · FENCED ({fence}): nothing copied" if fence else ""
+    nested = [(i, f) for i, f in nested_children(root, folder) if i not in t["children"]] if os.path.isdir(folder) else []
     out = (f"{pad}- {t['title']}{flags}\n{pad}  transcript {tid} · {account_label(t['account'])} · {size} · "
-           f"active {age(t['last'])} · {len(t['children'])} children\n"
+           f"active {age(t['last'])} · {len(t['children']) + len(nested)} children\n"
            f"{pad}  folder: {folder}{'' if os.path.isdir(folder) else ' (not created yet)'}")
+    for i, f in nested:
+        out += f"\n{pad}  nested folder (child with no session-record link): {os.path.basename(f)} · transcript {i[:8]}"
+    host = other_host(folder)
+    if host:
+        out += (f"\n{pad}  ⚠ written by another Mac last: {host[0]} at {host[2]}, handoff home {host[1]}. This is {host_name()}. "
+                f"Check that Mac's copy is not newer before resuming here.")
+    if create and os.path.isdir(folder):
+        stamp_host(folder, root)
+    if secret:
+        local = private_folder(t, create)
+        out += (f"\n{pad}  PRIVATE ({secret}): write the full handoff in {local}; "
+                f"{folder} gets only POINTER.md")
+        warning = private_leftovers(folder, local) if os.path.isdir(folder) else None
+        if warning:
+            out += f"\n{pad}  {warning}"
+        folder = local
     if os.path.isfile(os.path.join(folder, "HANDOFF.md")):
         since = last_handoff(folder, tid)
         entries = changelog(folder)

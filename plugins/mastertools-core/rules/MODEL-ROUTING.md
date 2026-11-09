@@ -42,6 +42,7 @@ Prefer free tools on this machine when the quality gap is small. They cost nothi
 ## Safe compaction
 Compaction can happen at any turn boundary, so every point in the work has to be resumable.
 - **Checkpoint:** keep a `## Now` section at the top of the project's `PROGRESS.md`. It holds the current step; which program, file, scene or comp is open and whether it's saved; the last step applied and how it was verified; the exact next action; anything that must not be redone; and a line `Safe to compact: yes` or `Safe to compact: no`.
+- **Skill steps survive compaction.** When a checkpoint is written after a skill loads, it lists that skill's owed steps (its checks, required output blocks and closing lines) as well as the build plan. After compaction the checkpoint is what gets followed, so steps left out of it are lost.{{+review_gate}}
 - **Multi-step operations in a live program** (C4D, AE, Photoshop, long builds or test runs): before starting, write the checkpoint with `Safe to compact: no`. After each verified step, save the program's file and update the checkpoint. When the operation is finished and saved, set `Safe to compact: yes`.
 - While it says `no`, {{plugin}} postpones automatic compaction (for up to 2 hours, and never past a hard size cap). Don't leave it at `no` once the step is done.
 - **When a "compaction is close" notice appears:** finish the current atomic step, save, update the checkpoint and set it to `yes`. Don't start a new multi-step operation until compaction has run.

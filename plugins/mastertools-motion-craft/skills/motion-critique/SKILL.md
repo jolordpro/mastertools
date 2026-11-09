@@ -4,16 +4,17 @@ description: >-
   Expert critique and quality review of motion work: UI transitions, broadcast
   opens, logo stings, After Effects comps, Lottie/Rive files, prototypes, reels,
   CSS/JS animation code, or a written motion spec. Turns vague reactions ("feels
-  slow", "too busy", "not premium", "cheap", "off") into precise mechanical
-  diagnoses and concrete notes with values, and runs a structured temporal QA
-  pass. Use whenever the user says "critique this animation", "give me notes",
-  "why does this feel off/slow/floaty/cheap/busy", "review this
-  transition/open/sting/comp/lower third", "motion QA", "run a crit with my
-  team", "is this easing right", "how do I mentor a junior on this", or pastes AE
-  keyframes, expressions, easing curves, cubic-bezier or spring values, Lottie
-  JSON, or motion tokens for review. Also use when the user wants to score or
-  calibrate motion quality, prepare team feedback, or sharpen their critique
-  vocabulary, even if they never say "critique".
+  slow", "too busy", "cheap", "off") into precise mechanical diagnoses and
+  concrete notes with values, and runs a structured temporal QA pass. Use
+  whenever the user says "critique this animation", "give me notes", "why does
+  this feel off/slow/floaty/busy", "review this transition/open/sting/comp",
+  "motion QA", "run a crit", "is this easing right", "mentor a junior on this",
+  or pastes AE keyframes, easing curves, spring values, Lottie JSON or motion
+  tokens for review. Also use for a fix round: the user's notes on a render lead
+  to a new version ("fix these", "make v10 from my notes", "look for these kinds
+  of details"); it writes the owed checks down before the build and measures
+  them after. Use it to score or calibrate motion quality too, even if the user
+  never says "critique".
 ---
 
 # Motion critique
@@ -45,7 +46,18 @@ Infer the mode from the request; if two fit, do the lighter one and offer the ot
 - **team-critique**: "run a crit", "mentor my designer", "how do I give this feedback". Facilitation script plus mentoring framing. Kind, specific, and leaves the maker with agency.
 - **qa-pass**: a build, render, or implementation to verify against intent. Temporal QA checklist with pass/fail/needs-capture per item (`references/review-protocols.md`).
 - **calibrate**: "what does good look like", "teach the bar". Show the same element at four quality levels so the gap becomes visible.
+- **fix-round**: the user's notes plus a build ("fix these", "make v10 from these notes", "look for these kinds of details"). Notes name what to fix; the skill still owes its checks. See "Fix round" below.
 - **system-review**: a token set, brand motion spec, or a whole site/app's motion ("does my motion system hold up?"). Review the system, not one moment: vocabulary (are there owned verbs or only curves?), semantic roles by frequency tier, declared versus perceived timing, coverage (states, focus, touch, reduced motion), doc-versus-code drift, and defects. Score absent mechanisms as absent and mark them provisional. Hand redesign work to `motion-system-architect` and portfolio scoring to `motion-evidence-audit`.
+
+### Fix round
+
+User notes name the problems, so the job feels like a build. The skill's checks still apply, and they are the part that gets lost: a checkpoint written before compaction that lists only build steps drops them.
+
+1. **Load what the notes ask for.** When the request says "find more", "what else", "these kinds of details" or similar, read `references/failure-modes.md` and `references/lexicon-and-diagnosis.md` before planning, and hunt the same kind of problem across the whole piece.
+2. **Write the owed checks first.** Before building, add an "Owed checks" list to the project's `PROGRESS.md` `## Now` checkpoint: every user note, every extra finding, the Broadcast pass items (when the dialect is broadcast), and the timeline table. Each check says how it will be measured. Build steps go under it, not instead of it.
+3. **Build**, one note at a time, with a Keep line per note so the fix doesn't break what works.
+4. **Run the owed checks** on the rendered frames, not on the plan. For broadcast, measure the Broadcast pass items the frames can show (format, safe-area edge distances in px, read-time holds in seconds, audio sync to the settle) and mark any that can't be measured as not run; the brief and tool items were settled in step 2. Tick each item in the checkpoint as it passes.
+5. **Output**: the quick-notes template, with each owed check's result (pass, fail or not run, with the measurement) and the Skill steps line.
 
 ## Pick the context dialect
 
@@ -108,7 +120,7 @@ Every substantive note has five parts, in this order. Short notes can fold them 
 2. **Perceptual effect** (what a viewer will experience)
 3. **Why it matters** (against the stated intent)
 4. **Change** (concrete, with values where you can: ms, frames, percentages, influence, stiffness/damping)
-5. **Preserve** (what is working and must survive the fix)
+5. **Keep** (what is working and must survive the fix). Every note ends with a `Keep:` line, even a short one; it is the part that protects the good work during the revision.
 
 Two formulas help keep them honest:
 
@@ -132,23 +144,28 @@ Note quality rules:
 What I could inspect: <one line, per Step 0>
 Read in one line: <what the motion is trying to do and whether it does it>
 Notes (highest impact first):
-1. <observation -> effect -> why -> change -> preserve>
+1. <observation -> effect -> why -> change>
+   Keep: <what must survive this fix>
 ...
 Works well: <1-2 specific things>
 To go further, capture: <exact asset>
+Skill steps: <used> · skipped: <what, and why>
 ```
+
+**Skill steps line** (every mode ends with it): the steps of this skill that ran, the ones skipped, and why. One line. The user should never have to ask what was skipped.
 
 **full-review** (lead with the top 5 notes; put the long tail after the plan so the review stays actionable)
 ```
 Scope and evidence: <what was inspected, confidence ceiling>
 Intent and context dialect: <stated or inferred; flag inference>
 Verdict: <2-3 sentences: ship / revise / rethink, and the single biggest lever>
-Findings by sequence stage: <only stages with findings; note format>
+Findings by sequence stage: <only stages with findings; note format, each ending with Keep:>
 Scorecard: <12 dimensions, 1-5, each with a revision hypothesis for any score of 3 or below>
 Failure modes spotted: <named, from references/failure-modes.md>
 Priority revision plan: <ordered, each with a test to confirm it worked>
 Revised timeline (time-based work): <one table, frame or timecode / event / change>
 Open questions / capture requests
+Skill steps: <used> · skipped: <what, and why>
 ```
 
 **team-critique**

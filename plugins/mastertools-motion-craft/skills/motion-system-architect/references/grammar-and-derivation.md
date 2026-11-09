@@ -4,7 +4,7 @@ Everything here comes before a single millisecond. The reason: infrastructure bu
 codifies arbitrary decisions (Compendium C35). Numbers are the last, cheapest thing to decide and the most
 expensive thing to change after teams depend on them.
 
-Source keys: KB-C = Motion systems KB v8 (Part/section), KB-S = Scalable KB, CMP = Compendium (C-code), RES = Research (R-code), ADV = Advanced v5.
+Source keys: KB-C = Motion systems KB v8 (Part/section), KB-S = Scalable KB, CMP = Compendium (C-code), RES = Research (R-code), ADV = Advanced v5, DR = staff_principal_design_research, DOS = motion_systems_dossier ("Motion Systems at Scale"), MKB4 = staff_motion_designer_master_knowledge_base_v4.
 
 ## Contents
 1. Intent and thesis
@@ -63,6 +63,13 @@ the system apart? If not, diagnose which layer is generic: physicality, easing, 
 If the user cannot supply brand assets (e.g. a new product), derive from the product's own interaction model
 (DIA/Pinterest move) or from the domain's true behavior (BUCK/football move). Say which source you used.
 
+**Derive while the identity is being made (RES R13, R06.19, R06.21).** When the identity is still being designed,
+develop motion with the mark and type, not after them. Test whether the mark's construction implies a movement,
+and whether a movement could build the mark. The failure is static-first, motion-later: motion feels bolted on,
+because nothing in the identity was made to move. This applies to identity creation. Building a package from an
+identity that already exists still starts from still frames for each piece (motion-critique context-dialects
+§3, package cohesion).
+
 ## 3. Verb vocabulary
 Three layers of "verb". Keep them distinct or the vocabulary bloats.
 
@@ -87,6 +94,21 @@ long settle), damping and overshoot (none / restrained / playful), directionalit
 from source"), dimensionality (flat / layered / depth; parallax allowed?), persistence (does anything linger,
 echo, hold?). Record **allowed ranges**, not single values.
 
+Two more families, decided with the rest (ADV 2.4-2.5, 45, 47; CMP C10):
+
+- **Camera grammar.** First decide whether the system thinks in objects (objects move in a stable world) or in
+  scenes (the frame itself moves). If in scenes, the camera is a primitive: write the permitted set (push in, pull
+  out, orbit, pan, locked camera with a moving subject, stepped camera, handheld) and the semantic condition for
+  each, e.g. push in = importance, pull out = context or release. Keep camera and object motion separate in cards
+  and contracts, so a team can keep the object animation and still break the identity through inconsistent
+  framing. The question is not "may the camera move?" but "which camera behaviors does this language allow, and
+  when?" motion-critique checks the result (context-dialects §3, camera and depth).
+- **Temporal texture.** How time is sampled is its own axis, beside duration and easing: continuous (fluid,
+  polished), stepped (graphic, energetic), held (emphatic hits), elastic (tactile, direct manipulation),
+  imperfect (human, creator-made), sparse (quiet, restrained). Frame rate, hold pattern and motion blur can be
+  identity, but only when chosen: declare the texture per tier, so stepped motion reads as intent and not as a
+  frame-rate mismatch. This is the authors' synthesis, not a standard. Tokens: token-architecture.md 1.
+
 Cross-platform rule: standardize the *perceptual* spring family (snappy, smooth, soft, playful) and map to native
 physics per platform; do not pretend raw stiffness/damping values are portable (KB-S 28.4-28.5). Springs are not
 "bounce": bounce is one outcome of damping (KB-S 28.4).
@@ -110,10 +132,30 @@ trigger -> attention acquisition (what leads) -> primary move -> secondary respo
 communicate one event; stagger to orient, but cap total time; end with the highest-priority content resolved.
 Treat attention as a budget: define a concurrency ceiling, a focal hierarchy, and an escalation rule (CMP C09.01).
 
+Pacing is information architecture as well as style: the order and rhythm of reveals tell the viewer what to
+read first and what matters, and cadence, pauses and acceleration can be as ownable as colour (RES R06.04, R10).
+Write the reveal order from the information priority, then give it the brand's rhythm.
+
 Responsive and multi-format motion is a function, not a pile of exports (CMP C13.01):
 `output = intent + content variables + format constraints + motion rules + platform profile`.
 Protect identity moments (entry cue, focal reveal, resolution) and let supporting motion stretch or compress,
 which is the idea behind After Effects "Responsive Design - Time" (ADV 7.2).
+
+**Kinetic type (ADV 17.4, 46; CMP C11).** Type is content and geometry at once. Define type behavior by level, each
+with its own variables and risk:
+
+| Level | Typical behavior | Variables | Risk |
+|---|---|---|---|
+| Character | reveal, shift, weight change | stagger, offset, weight, tracking | highest legibility risk |
+| Word | enter, flip, stretch, replace | group delay, scale, direction | emphasis inflation |
+| Line | slide, clip, cascade | baseline, mask, reveal edge | wrap breaks the move |
+| Block | reflow, resize, reorganize | layout state, density | lost reading position |
+| Composition | group transform, scene change | focal point, timing budget | type fights the camera |
+
+Separate typographic intent from the typeface: the same semantic behavior must survive a font change,
+localization, longer strings and a responsive break. For variable fonts, name which axes are expressive and which
+are functional, and the maximum range before legibility or hierarchy breaks. Readability limits live in the
+contract (contracts-and-specs.md 3). motion-critique checks the read (context-dialects §3, read time).
 
 ## 6. Expression tiers and frequency
 Frequency controls expression: the more often a viewer sees it, the quieter it must be (CMP C07.01, KB-C Part XXXIX).

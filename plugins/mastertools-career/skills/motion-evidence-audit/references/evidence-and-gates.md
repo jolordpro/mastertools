@@ -2,7 +2,7 @@
 
 Read this when assigning confidence, deciding gate status, checking attribution, or running the strip test. Scoring mechanics and the dimensions are in `rubric.md`.
 
-Source codes: **FW1**, **FW0**, **FR**, **PA**, **WB**, **HI** as defined in `rubric.md`.
+Source codes: **FW1**, **FW0**, **FR**, **PA**, **WB**, **HI** as defined in `rubric.md`; new: **DR** = staff_principal_design_research, **DOS** = motion_systems_dossier ("Motion Systems at Scale"), **RES** = motion_systems_research, **MKB4** = staff_motion_designer_master_knowledge_base_v4.
 
 The reason this file exists: the most common audit failure is mistaking visible sophistication for systemic sophistication. A polished reel, a handsome docs site and confident language all look like Staff work. The rules below force the audit to ask what exists, who used it, and what changed.
 
@@ -160,3 +160,18 @@ When the material looks finished but the evidence chain is thin, these are the q
 6. What did you deprecate?
 7. What did you intentionally not standardize?
 8. What did another designer do successfully without you present?
+9. **Exception test (DOS 36.5).** What was the hardest case that didn't fit the system? Listen for where it broke,
+   why, whether the problem was local or architectural, whether a pattern was added or an exception allowed, and
+   what governance decision followed. Systems are easiest to judge at their edges.
+10. **Curve-copy test (DOS 3.12).** If the work borrows a public system's curves or durations, ask: why does the
+    curve exist; how does it map to a component state; when is another curve right; what changes under gesture
+    control; what does reduced motion do to the information? Copied values with no answers show pattern
+    knowledge, not system expertise.
+11. **Diagnosis.** How was the problem found? Several examples clustered by cause, or the first complaint? What
+    did the status quo cost? (DR 5.2)
+12. **Adopted but failing.** What signal would tell you the system is adopted but failing, or under-adopted for
+    coverage reasons rather than resistance? (DR 13.4)
+13. **Constraint to abstraction (DOS 34.4).** In the engineering story, did a constraint produce a better reusable
+    abstraction (for example, arbitrary paths replaced by a few movement families that map cleanly to each
+    runtime)? A compromise story is Senior evidence; a constraint that became a reusable abstraction is Staff
+    evidence.

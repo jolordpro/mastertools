@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: Make Claude Code threads resumable from files alone, so the work can continue on another Claude account, in a fresh session, or after a long break. Writes one folder per thread (named by thread title, child threads nested inside their parent's folder) with a handoff, a short summary and a resume prompt; checks for live work the switch could lose (renders or servers started from a session, busy terminals, unsaved documents, uncommitted git work); asks once before waking child threads so they hand off too; and rolls everything up into one START-HERE page with red flags first. Use whenever the user says "handoff", "hand off", "/handoff", "I'm switching accounts", "moving to another Claude account", "back up my threads", "make this resumable", "write a pickup file", "roll up the handoffs", or asks how to carry context, compacted context or cached tokens to another account. To resume on the new account, use the handoff-resume skill instead. Not for summarizing a thread for a person to read, and not for moving a session to the cloud.
+description: Make Claude Code threads resumable from files alone, so the work can continue on another Claude account, in a fresh session, or after a long break. Writes one folder per thread (named by thread title, child threads nested inside their parent's folder) with a handoff, a short summary and a resume prompt; checks for live work the switch could lose (renders or servers started from a session, busy terminals, unsaved documents, uncommitted git work); asks once before waking child threads so they hand off too; and rolls everything up into one START-HERE page with red flags first. Use whenever the user says "handoff", "/handoff", "I'm switching accounts", "back up my threads", "make this resumable", "write a pickup file", "roll up the handoffs", or asks how to carry context or compacted context to another account. To resume on the new account, use the handoff-resume skill instead. Not for summarizing a thread for a person to read, and not for moving a session to the cloud.
 ---
 
 # Handoff
@@ -38,7 +38,7 @@ Scripts live in this skill's `scripts/` folder. Run each with `python3 -I`. `<HA
 | `CHANGELOG.md` | Update mode | One dated entry per later handoff, from either account: what changed since the last one. Newest at the bottom |
 | `CHANGELOG-ARCHIVE.md` | Update mode | Entries already folded into `HANDOFF.md` |
 | `AUTO-DIGEST.md` | auto-backup hook | Script-made backup after each turn (no model, no usage). In a shared folder, other sessions write `AUTO-DIGEST-<id>.md`, so accounts never overwrite each other |
-| `POINTER.md` | fence | A regulated thread: nothing copied, only where its local transcript is |
+| `POINTER.md` | fence | A fenced thread: nothing copied, only where its local transcript is. A private thread: where its full handoff is |
 | `files/` | Write mode | Copies of scratchpad files the next thread needs |
 
 ## Write mode
@@ -49,7 +49,7 @@ Don't start new work.
 
 **1. Find yourself.** Your transcript id is the folder name in your scratchpad path. Run `handoff_tree.py <transcript id> --create`: it prints your title, parent, children (the whole subtree, with size, compactions and last activity) and creates your folder. Each thread line ends with `mode: WRITE` or `mode: UPDATE`. On UPDATE, switch to **Update mode** below now. If you were started outside the desktop app it finds no record: use `<HANDOFF>/<short title of your own>/` and write your transcript id into `.thread-id` there.
 
-**2. Fence check.** If `handoff_tree.py` marks you FENCED, or your work is regulated (client, patient or other confidential records), write only `POINTER.md` (where your transcript is) and a `SUMMARY.md` with no content details. Copy nothing else. Report and stop.
+**2. Fence check.** If `handoff_tree.py` marks you PRIVATE, write every file below into the private folder it prints, and in `<HANDOFF>` only `POINTER.md` naming that folder; Update mode works there too. If it marks you FENCED, or your work is regulated (client, patient or other confidential records), write only `POINTER.md` (where your transcript is) and a `SUMMARY.md` with no content details. Copy nothing else. Report and stop.
 
 **3. Live check.** Run `handoff_live.py --thread <transcript id> --paths <folders you worked in>`. In the desktop app also: `list_terminal_tabs` (a tab with `is_running_command: true` is a busy terminal in this session), your own background shells, scheduled tasks and artifacts you made. For each 🔴 that is yours: finish it, save it, or relaunch it detached (`nohup … &` or from the app) if it is safe and quick; otherwise record it. Never commit, push or close someone else's work to clear a flag; record it.
 
@@ -59,6 +59,10 @@ Don't start new work.
 3. Update state files you own (PROGRESS.md, COORDINATOR.md, notes) first. Files another thread owns: note what they miss.
 4. Copy anything the next thread needs from a scratchpad or the app's support folder into `files/`. If it's gone, say where its content went.
 5. Copy all scripts into the `<HANDOFF>` root, next to `INDEX.md` (never into a thread folder), if they're missing or older there.
+6. Run `date`. After any compaction, check every relative day ("tomorrow", "Friday") against it and write dates.
+7. Read the project's `.claude/settings*.json` allow-lists. List each pre-allowed tool that publishes, sends, spends or deletes as 🟠 in section 1.
+8. Harvest standing rules and tool or connector ids from project files and compaction summaries into a "Standing rules" list in section 5.
+9. Re-check every carried "waiting on", open decision and 🔴 live before you write it: `gh pr view`, grep the project's rulings and decision logs where they exist. An answered item moves to section 5 with the quote and its source.
 
 **5. Write the files.** `HANDOFF.md` sections, in order:
 1. **Transfer check.** 🔴 lines first: anything not transferred or off (live work from step 3, lost scratchpad files, unreachable children, missing paths). Then ⚪ expected items (prompt cache, artifacts to re-publish, scheduled tasks to re-create). Goal: no red.
@@ -75,7 +79,11 @@ Don't start new work.
 12. Related threads with transcript ids and folders: parent, peers, children (each "pending" until it reports, or "covered by its auto-backup" if you won't wake it).
 13. Sources: transcript path and id, number of compactions.
 
-Rules: absolute paths everywhere, facts not narrative, under about 250 lines, no passwords, keys or tokens (say where they live), no client, patient or other regulated information (use placeholders like [CLIENT NAME]).
+Rules:
+- Quote holds, rulings and "never" lines verbatim from their source, with file:line. Never from a compaction summary.
+- 🔴 only for an action due before the next step. Context is ⚪. A deadline gets ⏰ and its date. Sort next actions by nearest deadline.
+- Each script step you name records "done (date)" and "safe to re-run?". A step unsafe to re-run is 🔴 "never re-run".
+- Absolute paths everywhere, facts not narrative, under about 250 lines, no passwords, keys or tokens (say where they live), no client, patient or other regulated information (use placeholders like [CLIENT NAME]).
 
 `SUMMARY.md`, exactly:
 ```
@@ -90,7 +98,9 @@ Folder: <absolute path>
 
 **6. Index.** Append one line to `<HANDOFF>/INDEX.md` with a single `>>`: `- <date> | <project> | <title> | transcript <id> | <folder>/HANDOFF.md | parent: <title or none> | next: <one line>`.
 
-**7. Check.** `ls` every path you named. Every term is plain or in the glossary. No secrets, no regulated information. Then run `handoff_rollup.py`.
+**7. Check.** `ls` every path you named. Every term is plain or in the glossary. No regulated information. Run `handoff_secrets.py <folder>` (and the private folder, if any): it reads every file, AUTO-DIGEST included. On a hit, rerun it with `--fix` and confirm it comes back clean. Then run `handoff_rollup.py`.
+
+**Cold read, last.** Start a fresh `opus-reviewer` helper. Give it only the new handoff files and the sources they name, and one question: "what will the next session get wrong?", with file:line for each finding. Fix each finding or note it in section 10.
 
 **8. Cascade to child threads** (skip for "handoff here only", or when you have no children). Your own files are written first, so a cascade that stalls or runs out of usage loses nothing.
 - Read each child's `SUMMARY.md` or `AUTO-DIGEST.md` if present. Recommend waking a child only if it has live work, a 🔴 flag, decisions in flight, or activity after the point your handoff captured its result. An idle child whose result is already in your handoff (section 12) doesn't need waking; its auto-backup covers it.
@@ -107,7 +117,7 @@ Folder: <absolute path>
 The folder already holds a handoff, written by this thread or by a session on the other account. The other account has read it. Don't rewrite it; tell it what changed.
 
 1. Do Write steps 0 to 3 as usual (pause, find yourself, fence, live check).
-2. Harvest only what is new: `handoff_extract.py <transcript id> --since <value from the mode line> --out <scratchpad>/digest.md`. "whole transcript is new" means leave `--since` out. Read the folder's `SUMMARY.md` and the `CHANGELOG.md` entries after your last one, so you don't repeat what another session already logged.
+2. Harvest only what is new: `handoff_extract.py <transcript id> --since <value from the mode line> --out <scratchpad>/digest.md`, then Write step 4 items 6 to 9. "whole transcript is new" means leave `--since` out. Read the folder's `SUMMARY.md` and the `CHANGELOG.md` entries after your last one, so you don't repeat what another session already logged.
 3. Append one entry to `CHANGELOG.md` with a single `>>` (both accounts may write; never rewrite the file). The header is parsed by scripts, so keep it exact, in local time:
    ```
    ## 2026-10-28 21:14 · <account name> · <thread title> · transcript <first 8 characters of your id>
@@ -120,7 +130,7 @@ The folder already holds a handoff, written by this thread or by a session on th
    ```
    `<account name>`: the name the tree line shows (set friendly names in `~/.config/handoff/accounts`).
 4. Edit only the `HANDOFF.md` sections that are now wrong: usually 1 (transfer check), 4 (where we stopped), 6 (open decisions), 8 (state on disk). Leave the rest alone.
-5. Rewrite `SUMMARY.md` (same 5 lines). `RESUME-PROMPT.md` changes only if the next action or effort changed; it already says to read `CHANGELOG.md` entries after the reader's last one.
+5. Rewrite `SUMMARY.md` (same 5 lines) and refresh `RESUME-PROMPT.md` (next action, effort). The roll-up flags either one older than `CHANGELOG.md`.
 6. **Fold** when `CHANGELOG.md` holds more than 5 entries: absorb the older ones into `HANDOFF.md`, move them to the end of `CHANGELOG-ARCHIVE.md`, keep the newest 2. A reader then faces at most a handful.
 7. Then Write steps 6 to 10 (index line marked "update", check, cascade, report). A child woken by a cascade follows the same rule: Update when its folder has a handoff.
 
@@ -128,12 +138,13 @@ When the other account reopens a thread that shares this folder, the session-sta
 
 ## Roll-up mode
 
-`handoff_rollup.py` rewrites `<HANDOFF>/START-HERE.md`: red flags from every thread, then the thread tree (from the app's session records, else folder nesting) with each thread's status and next step, older single-file handoffs, and every open decision. Safe to rerun. `handoff_tree.py --active-days 7` lists every thread active this week, as trees.
+`handoff_rollup.py` rewrites `<HANDOFF>/START-HERE.md`: red flags from every thread, then the thread tree (from the app's session records, else folder nesting) with each thread's status and next step, older single-file handoffs, and every open decision. Flags naming a dead pid or a missing lock get "(pid gone, checked <time>)"; a thread that worked past its handoff, or whose CHANGELOG is newer than its SUMMARY, gets a 🔴. `--unresumed` lists folders with a handoff that no session resumed. Safe to rerun. `handoff_tree.py --active-days 7` lists every thread active this week, as trees.
 
 ## Setup mode
 
 - **Auto-backup** (no usage cost): `mkdir -p ~/.config/handoff && touch ~/.config/handoff/auto`. The plugin's Stop hook then runs `handoff_auto.py` after each turn, at most every 30 minutes per thread, for desktop threads with transcripts over 150 KB. Remove the file to turn it off.
-- **Fence:** one term per line in `~/.config/handoff/fence` (a project folder name, a client or program name). Threads whose title or folder contains a term get only `POINTER.md`; nothing from them is copied.
+- **Fence:** one term per line in `~/.config/handoff/fence` (a project folder name, a client or program name). Threads whose title or folder contains a term get only `POINTER.md`; nothing from them is copied. A `private: <term>` line keeps the full handoff and auto-backup in `<project>/.handoff-private/<title>/` (git-ignored) and puts only `POINTER.md` in `<HANDOFF>`, so updates keep working. `<project>/.handoff-private` is outside the shared `<HANDOFF>` but still syncs when the project sits in Dropbox. Handoff files already in a private thread's `<HANDOFF>` folder are flagged by `handoff_tree.py` and the auto-backup, never moved or deleted: move them by hand.
+- **Redaction:** every script redacts passwords, PINs, keys, tokens and private keys before it writes. Add your own words, one per line, to `~/.config/handoff/redact`.
 - **Folder:** write the handoff folder's path into `~/.config/handoff/dir`.
 - **Usage alert:** in the desktop app, create a scheduled task every 6 hours whose prompt reads `get_usage`; when the weekly limit passes 85%, it sends one notification that week asking whether to back up the week's threads (`handoff_tree.py --active-days 7`). It never runs the backups itself, because each handoff spends usage. Check on its first run that the scheduled session can call `get_usage`.
 - **Tidy:** `handoff_tree.py --tidy` moves child folders inside their parent's folder, judged by each folder's original thread only.

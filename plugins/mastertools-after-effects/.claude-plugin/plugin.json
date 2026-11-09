@@ -1,6 +1,6 @@
 {
   "name": "mastertools-after-effects",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "After Effects module for Master Tools.",
   "license": "MIT",
   "dependencies": [

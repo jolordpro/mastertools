@@ -5,9 +5,10 @@ CSS transition, a Web Animation, a view transition, a native spring, a vector ru
 Principle for every emitter below: **translate, do not transcribe.** Preserve semantic role, hierarchy, relative
 timing, and physical character; let curves, frame rates, and constants differ (KB-C 129.1).
 All code here is illustrative; verify against the current platform docs and OS/browser versions before shipping.
+(Source keys: grammar-and-derivation.md line 7.)
 
 ## Contents
-1. Runtime selection
+1. Runtime selection, integration entry point, production model
 2. CSS custom properties
 3. WAAPI and Motion.dev
 4. After Effects (values, frames, Essential Properties)
@@ -27,8 +28,38 @@ All code here is illustrative; verify against the current platform docs and OS/b
 | Lottie / dotLottie | portable authored assets | illustration, expressive sequences | can become a black box without documented semantics |
 | After Effects / MOGRT | rich authoring, broadcast/editorial templates | broadcast, social, editorial toolkits | not a product runtime; interactivity bounded by exposed controls |
 | Pre-rendered video | maximum control | campaign, broadcast, hero | lowest adaptability, poorest semantic interoperability |
+
 Timing sources differ: clock-time (duration), scroll-linked, gesture-linked, input-linked. A duration token cannot
 describe the last three; give them contracts (`timingSource`).
+
+**Integration entry point (DOS 43).** Before picking runtimes, decide what the system is built around first:
+
+| Entry | Fits when | Strength | Risk |
+|---|---|---|---|
+| Token-first | many products share fundamentals; code consumption matters | easy global change | becomes too abstract |
+| Component-first | behavior is component-specific; designers need ready patterns | high usability | behavior duplicated across components |
+| Pattern-first | interaction logic spans components and workflows | captures choreography and state | hard to maintain without a strong taxonomy |
+| Tool-first | production volume is huge and output varies widely | high production throughput | the tool outlives the design logic it encoded |
+
+Most mature systems end hybrid (tokens, behaviors, components, patterns, tools, code, governance). Name the entry
+point and the risk you are watching.
+
+**Production model (CMP C18.01-C18.02, C19).** A brand or toolkit system also picks how outputs get made:
+
+| Model | Characteristics | Tradeoff |
+|---|---|---|
+| Static export | pre-rendered assets | most craft control, least flexibility |
+| Template-driven | variables in editable source files | strong operational gain, moderate flexibility |
+| Parametric | rules generate the variants | high scale; needs stronger system design |
+| Runtime | renders live from data and context | most adaptable; needs engineering and QA |
+| Agentic | AI or agents assemble assets under rules | huge scale; governance and taste become critical |
+
+For parametric, runtime and agentic models, use **bounded randomness**: define the space of legal outputs (input
+schema and validation, brand rules, seed and distribution, a deterministic mode for review, a runtime fail-safe,
+human override and approval points, and snapshot plus rule QA), and never ask the generator to "make it on-brand".
+Selection and rejection criteria: governance.md 6, generated variants. Once motion runs as infrastructure, the
+system is a small software product: schemas, error handling, versioning, observability and permissions (CMP
+C19.01).
 
 ## 2. CSS custom properties
 Emit one variable per primitive and per semantic member, then composite shorthands. Keep reduced/instant as
@@ -92,6 +123,7 @@ the current AE version; for scripting/tooling defer to the `after-effects-engine
 | Mode controls as dropdowns | `Intensity: Quiet / Standard / Loud` | bounded expressive choice |
 | Protected items prefixed or in a locked comp | `_LOCK Timing Core` | invariant stays unexposed |
 | Version stamp on the template | `LM_Toolkit v1.3.0` | orphan detection |
+
 Do not expose `Slider 4`, raw keyframes, or expression chains. Document which control drives which token and what
 it protects (control table in contracts-and-specs.md section 7).
 

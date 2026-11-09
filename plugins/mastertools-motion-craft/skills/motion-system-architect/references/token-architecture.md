@@ -2,6 +2,7 @@
 
 Tokens are the *last* layer of the thinking and the first layer of the machinery. A token is a reusable decision
 with a meaning, not a repeated number (KB-C Part VIII.3, 116.4). Read this after verbs and cards exist.
+(Source keys: grammar-and-derivation.md line 7.)
 
 ## Contents
 1. Seven classes of motion token, and which become JSON
@@ -25,7 +26,7 @@ soup starts.
 | Strategic | brand intent, emotional posture | thesis and principles docs |
 | Behavioral | named verbs (Reveal, Settle) | behavior cards + `semantic.verb.*` tokens |
 | Physical | weight, stiffness, damping, overshoot | primitives (+ spring extension) |
-| Temporal | duration, delay, hold, stagger | primitives + semantic duration |
+| Temporal | duration, delay, hold, stagger; temporal texture (continuous, stepped, held...) | primitives + semantic duration; texture as `temporalTexture` on semantic tokens or a mode |
 | Choreographic | follow, overlap, handoff, resolve | `choreography.*` tokens / pattern docs |
 | Contextual | dialect (product, social, event) | modes or dialect alias sets |
 | Constraint | explicit negative space | anti-rules in cards, lint rules, `$extensions` limits |
@@ -77,11 +78,15 @@ If the file wraps everything in one top-level group (e.g. `{"brand": {...}}`), a
   "pairsWith": "{semantic.easing.reveal}",   // duration+curve pairs code combines (alias or list); gets an exact frame-1 snap check
   "platformMappings": { "css": "--motion-reveal", "ae": "Verb/Reveal", "swiftui": ".snappy", "compose": "MotionScheme.defaultSpatialSpec" },
   "performanceClass": "transform-opacity",   // optional; transform-opacity | layout | heavy-filter | continuous | runtime
+  "temporalTexture": { "mode": "stepped", "sampleRate": 12 },   // optional; continuous | stepped | held | elastic | imperfect | sparse; sampleRate in fps for stepped (grammar 4)
   "llm": { "use": "Primary content arrives", "avoid": "High-frequency feedback" }   // optional context for AI agents
 }}
 ```
 Why `modes` and `reducedMotion` both: `modes` holds the *values* (so emitters can generate CSS for each mode);
 `reducedMotion.strategy` holds the *policy* (what meaning survives and how), which reviewers and AI agents read.
+
+`temporalTexture` is policy, like `reducedMotion`: emitters translate it (e.g. a CSS `steps()` timing function,
+an AE posterize-time expression), and a whole-dialect texture is better as a mode than as a key on every token.
 
 ## 5. Springs, stagger, sequences
 **Spring.** A spring token is a `transition` whose DTCG `$value` is a *fallback* (duration + curve approximating the

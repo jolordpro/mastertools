@@ -1,6 +1,6 @@
 {
   "name": "mastertools-c4d-redshift",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Cinema 4D, Redshift and shot polish module for Master Tools.",
   "license": "MIT",
   "dependencies": [

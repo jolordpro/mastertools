@@ -73,14 +73,4 @@ How to use it: a nationally posted remote role with no range is a compliance gap
 
 A dated example of what the market looked like, for orientation only. Rerun the scan before advising.
 
-| Employer | Role | Posted range | Location truth | Date |
-|---|---|---|---|---|
-| OpenAI | Motion Designer, Business Marketing | $223K–$247K + equity | SF, hybrid 3 days (board flag says remote) | 2026-10-14 |
-| Mercury | Staff Motion Designer - 3D | $170.4K–$236.7K | SF/NY/Portland or remote US/Canada | 2026-09-16 |
-| Perplexity | Motion Designer | $180K–$210K + equity | NYC (board flag conflicts) | 2026-09-02 |
-| Adobe | Motion Graphics Designer / Animator | $94.9K–$209.6K | San Francisco | 2026-09-24 |
-| Adobe | Group Manager, Motion Graphics & Editorial | $118.3K–$259.8K | San Francisco | 2026-09-18 |
-| Suno | Motion Designer, Paid Social (contract) | $70–$90/hr | Remote | 2026-09-25 |
-| Amazon (site) | Senior Motion Designer, Devices Brand Studio | open the posting | Seattle | 2026-07-28 |
-
 What it showed: one motion posting on these boards had a band whose floor clears $300K, at Senior level. Anthropic's board listed 656 jobs and no motion roles. Figma, Airbnb, Stripe, Duolingo and Pinterest boards listed none either. Across 26 matched postings at 10 employers, the most requested terms by employer count were AI (8), brand (7), product (7), 3D (6) and After Effects (6); Houdini appeared at 1 employer, Rive and Lottie at none.

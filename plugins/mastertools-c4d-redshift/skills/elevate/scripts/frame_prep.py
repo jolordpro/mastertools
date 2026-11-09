@@ -24,8 +24,13 @@ import sys
 try:
     from PIL import Image, ImageDraw, ImageFont
 except ImportError:
-    sys.stderr.write("frame_prep needs Pillow: run `pip install pillow` (add --break-system-packages "
-                     "on managed Pythons), or skip it and cite an imagined 4x4 grid (A-D, 1-4).\n")
+    if sys.flags.isolated:
+        sys.stderr.write("frame_prep can't see Pillow because Python runs isolated (-I), which hides "
+                         "user-installed packages. Run it without -I, or with "
+                         "`uv run --with pillow python frame_prep.py ...`.\n")
+    else:
+        sys.stderr.write("frame_prep needs Pillow: run `pip install pillow` (add --break-system-packages "
+                         "on managed Pythons), or skip it and cite an imagined 4x4 grid (A-D, 1-4).\n")
     sys.exit(2)
 
 

@@ -4,6 +4,7 @@ Used by `retro-document` (inventory, step 1 of grammar-and-derivation.md 10) and
 when the system is a broadcast or streaming graphics package. A package is not a reel of pieces: it is a set of
 element families, each shipped in counted variants, opened by people who were not in the room. Inventory it in
 that shape before naming verbs, or the thesis gets written from the three pieces you remember.
+(Source keys: grammar-and-derivation.md line 7.)
 
 Evidence: **synthesis** of three shipped guides read in 2026 (a US network's 2021 affiliate graphics guide, a
 global automotive identity manual, a pro sports team identity guide) plus common broadcast practice. Element
@@ -88,7 +89,15 @@ Bigger identities add layers a package should at least decide on, even as `not y
 
 - **Layered layout system:** fixed layers (logo zone, safe frame) vs free layers (image, type), stated per format.
 - **Sub-brands and dialects:** how a show, event or region inherits the core and what it may change.
-- **Sonic logo:** the audio signature, its lengths, and which visual event it locks to.
+- **Sonic logo and coupling:** the audio signature, its lengths, and which visual event it locks to. Then state
+  how sound and motion relate across the package (CMP C12): synchronized (a transient drives timing; define sync
+  points and a tolerance window), complementary (sound matches the motion family's energy without dictating
+  frames), independent (a parallel identity layer), reactive (both respond to data; say which leads when signals
+  compete), and silence-safe (meaning survives with no sound, which every element needs for autoplay, social and
+  public screens). A shared vocabulary helps (pulse, attack, release, density, resonance, sustain, silence); the
+  visual mappings, e.g. sharp transient to a short high-acceleration entrance, are a synthesis, not a standard.
+  motion-critique checks the hit frame (SKILL.md, sync to the settle). For product events with audio or haptics,
+  see ai-state-motion.md.
 - **Co-branding:** lockup rules with partner, sponsor or league marks; clear space; who leads.
 - **Rallying line:** a short verbal motto some systems pair with the visual identity; voice belongs with copy, not here.
 

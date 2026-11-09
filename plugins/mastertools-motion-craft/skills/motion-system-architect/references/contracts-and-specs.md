@@ -3,6 +3,7 @@
 A token says what a value means. A contract says how a component or pattern *asks* for the behavior, what
 happens when the user acts mid-motion, and what survives under reduced motion. This is where motion design
 becomes interaction architecture (KB-S 26.2).
+(Source keys: grammar-and-derivation.md line 7.)
 
 ## Contents
 1. The five tests of executable motion
@@ -70,6 +71,12 @@ transitions:
     focus:
       onOpen: trap-after-enter-ready
       onClose: restore-after-close-complete
+    readability:                           # text-bearing components only (CMP C11.01)
+      minDwell: semantic.duration.readHold # a dwell token (name is an example); never shortened by reduced/instant
+      duringRead: none                     # none | subtle | free: movement allowed while the text is being read
+      maxAmplitude: 4px                    # example value, set per system: transform limit while text is on screen
+      contrastInMotion: hold               # contrast may not drop below the static value mid-move
+      reduced: static-text                 # what the text does under reduced motion
     responsive:
       narrow: sheet-from-bottom
       wide: anchored-centered
@@ -87,7 +94,8 @@ accessibility:
 Why each block exists: `interruption` because a timeline presumes the user waits and a state machine presumes
 they will not; `reducedMotion.preserves` because the goal is meaning, not removal; `focus` because motion must
 never delay critical semantic feedback (Atlassian guidance, KB-S 9.5); `qaStates` so tests are written from the
-contract.
+contract; `readability` because type motion is semantic with accessibility consequences, not decoration; the validator
+already warns when a reduced or instant mode shortens a dwell token.
 
 ## 4. Transition matrix and interruption rules
 For anything with more than two states, enumerate every meaningful source -> destination pair, including blocked
@@ -106,7 +114,7 @@ when the clip is trimmed, extended, or cut early (protected regions, minimum hol
 
 ## 5. Minimum spec checklist (KB-S 12.1)
 Intent, trigger, source state, target state, properties, origin, path, timing model (duration/curve/spring/user-
-driven), temporal composition, interruption, reversal, responsive rule, reduced motion, platform mapping,
+driven), temporal composition, interruption, reversal, responsive rule, reduced motion, readability (for text), platform mapping,
 performance constraints, QA states, rationale. Separate subjective descriptors ("snappy") from implementation
 descriptors ("150ms ease-out", "response 0.28 damping 0.78"); the first carries intent, the second precision.
 A prototype is evidence, not the contract (KB-S 12.4).
@@ -183,6 +191,7 @@ grammar-and-derivation.md section 12.
 | 10 | Reduced-motion guide | behavior-level fallbacks | per-verb strategy table |
 | 11 | QA checklist | visual, semantic, accessibility, technical | QA doc |
 | 12 | Governance | ownership, contribution, release, deprecation, exceptions | governance pack |
+
 For a small job, deliver 01-04, 10, and 12 as one-page sections and mark the rest `not yet`, rather than writing
 filler. Order matters: 01-03 before 04.
 

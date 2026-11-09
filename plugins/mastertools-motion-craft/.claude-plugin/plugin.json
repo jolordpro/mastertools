@@ -1,6 +1,6 @@
 {
   "name": "mastertools-motion-craft",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Motion craft module for Master Tools.",
   "license": "MIT",
   "dependencies": [

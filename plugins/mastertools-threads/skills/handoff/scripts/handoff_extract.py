@@ -15,6 +15,9 @@ Prints, in order:
 import json, re, sys, glob, os, argparse
 from collections import OrderedDict
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from handoff_common import redact  # noqa: E402
+
 INJECTED = re.compile(r"<(system-reminder|task-notification|side-sessions-event|local-command-stdout|"
                       r"local-command-caveat|command-name|command-message|command-args|ci-monitor-event)"
                       r"[^>]*>.*?</\1>", re.S)
@@ -27,6 +30,9 @@ SHELL_WRITE = re.compile(r"(^|[;&|]\s*)(patch|cp|mv|rsync|ditto|tee|mkdir|unzip|
 
 
 GIT_COMMIT = re.compile(r"(^|[;&|(]\s*|\n\s*)git(\s+-C\s+(\"[^\"]*\"|'[^']*'|\S+))?\s+commit\b")
+# Files a shell command creates: `> file`, `>> file` (heredocs included, once their bodies are stripped) and `tee file`.
+REDIRECT = re.compile(r"(?<![<>0-9&=-])>{1,2}\s*(\"([^\"\n]+)\"|'([^'\n]+)'|([^\s;&|<>()\"']+))")
+TEE = re.compile(r"\btee\s+(?:-a\s+)?(\"([^\"\n]+)\"|'([^'\n]+)'|([^\s;&|<>()\"']+))")
 HEREDOC = re.compile(r"<<-?\s*(['\"]?)(\w+)\1[^\n]*\n(.*?)\n\s*\2\b", re.S)
 
 
@@ -98,6 +104,7 @@ def main():
     seen = set()
     pending_sessions = {}  # tool_use id -> index in sessions
     shell_files = OrderedDict()  # path -> last ts
+    shell_made = set()  # files a redirect or tee wrote, listed with the written files
     first = last = None
     for line in open(path, encoding="utf-8", errors="replace"):
         try:
@@ -176,6 +183,17 @@ def main():
                         d = (m.group(2) or m.group(3) or m.group(4)).rstrip(";&") if m else None
                         if d and "$" in d:
                             d = None  # a shell variable, not a real folder
+                        for rm in list(REDIRECT.finditer(shell)) + list(TEE.finditer(shell)):
+                            target = os.path.expanduser(rm.group(2) or rm.group(3) or rm.group(4) or "")
+                            if not target or "$" in target or target.startswith(("/dev/", "&")):
+                                continue
+                            if not target.startswith("/") and not re.search(r"\.[A-Za-z0-9]{1,6}$", target):
+                                continue  # a bare word after > is more often code than a file
+                            full = target if target.startswith("/") else (os.path.join(d, target) if d else None)
+                            if full and not full.startswith(TEMP):
+                                full = os.path.normpath(full)
+                                written[full] = ts
+                                shell_made.add(full)
                         if d and not d.startswith(TEMP):
                             shell_writes.append((ts, d))
                         found = re.findall(r'["\']([^"\'\n]{1,200}\.[A-Za-z0-9]{1,6})["\']', cmd) + re.findall(r'()>>?\s*([^\s;&|"\']+\.[A-Za-z0-9]{1,6})(?=[\s;&|)]|$)|()>>?\s*([~/][^\s;&|"\'$]+)', shell)
@@ -187,6 +205,8 @@ def main():
                             full = lit if lit.startswith("/") else (os.path.join(d, lit) if d else None)
                             if full and not full.startswith(TEMP):
                                 full = os.path.normpath(full)
+                                if full in shell_made:
+                                    continue
                                 if full in written:
                                     written[full] = ts  # later shell edit of a file also edited with Edit/Write
                                 else:
@@ -211,6 +231,8 @@ def main():
         flag = "" if os.path.exists(f) else "  (MISSING now)"
         if f.startswith(("/private/tmp", "/tmp", "/var/folders")):
             flag += "  (TEMP: copy into the project before handoff)"
+        if f in shell_made:
+            flag += "  (shell)"
         p(f"- {ts[:16] if ts else ''} {f}{flag}")
     p("\n## Artifacts published (account-bound)\n")
     for k, ts in artifacts.items():
@@ -243,7 +265,7 @@ def main():
     p("\n## Git commits\n")
     for ts, m in commits:
         p(f"- {ts[:16] if ts else ''} {m}")
-    text = "\n".join(out)
+    text = redact("\n".join(out))
     if a.out:
         open(a.out, "w").write(text)
         print(f"Wrote {a.out} ({len(text)} chars, ~{len(text)//4} tokens)")

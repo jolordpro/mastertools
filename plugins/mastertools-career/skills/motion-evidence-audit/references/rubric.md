@@ -4,7 +4,7 @@ Read this when scoring. It holds the scale, the weights, the axis map, the two m
 
 Everything here is a synthesis of five research documents. The weights, the axis map and the score bands are this skill's own consolidation, not an industry standard and not a hiring predictor.
 
-Source codes used below: **FW1** = Staff/Principal Motion Systems Assessment Framework (C01 to C22, the spine). **FW0** = the earlier forensic edition of that framework. **FR** = Forensic Rubric. **PA** = Portfolio Audit Manual. **WB** = World-Class Motion and Interaction Benchmark. **HI** = Horizontal Influence knowledge base, Part V.
+Source codes used below: **FW1** = Staff/Principal Motion Systems Assessment Framework (C01 to C22, the spine). **FW0** = the earlier forensic edition of that framework. **FR** = Forensic Rubric. **PA** = Portfolio Audit Manual. **WB** = World-Class Motion and Interaction Benchmark. **HI** = Horizontal Influence knowledge base, Part V. **DR** = staff_principal_design_research, **DOS** = motion_systems_dossier ("Motion Systems at Scale"), **RES** = motion_systems_research, **MKB4** = staff_motion_designer_master_knowledge_base_v4.
 
 ## 1. Scale
 
@@ -157,6 +157,7 @@ Look at: a spec as a contract (triggers, states, properties, tokens, interruptib
 - **4:** Specs act as repeatable contracts that cut live interpretation; behavior and architecture are co-designed with engineering; fidelity versus cost is negotiated with evidence; the shipped implementation is inspectable.
 - **5:** Shapes the technical foundation or API through which several teams implement motion, changing the design/engineering interface itself.
 Proof: motion spec or pattern contract; acceptance criteria; runtime prototype; implementation notes or PR threads where shareable; performance test; the compromise story (what stayed invariant, what changed).
+Discriminator: a constraint that became a reusable abstraction outranks a compromise story (DOS 34.4).
 False positive: a GIF or video as the whole API; "partnered closely with engineers"; "technical motion designer"; After Effects keyframes only; "GPU means faster".
 
 ### D8. Accessibility as architecture (5, Product Interaction)
@@ -194,11 +195,13 @@ Look at: decision rights; a contribution path (proposal or RFC); review criteria
 - **4:** Scalable governance balancing consistency and team autonomy, with safe paths for change, exception and migration rules, and a roadmap that names systemic debt.
 - **5:** A federated or platform-level operating model that evolves without turning bureaucratic, plans the next generation while retiring the old, and survives personnel change.
 Proof: contribution workflow; RFC template; decision record; deprecation policy; migration guide; changelog; roadmap.
+Check the roadmap's mix: demand, debt, capability, migration, enablement; all-reactive reads as a ticket queue (DR 9.2).
 False positive: a document titled "governance" with no owner, review or versioning; "owned the design system"; every exception made permanent.
 
 ### D12. Adoption and enablement (8, Org Leverage)
 Merges FW1 C18 and C19 enablement; FW0 §15; FR 3.10, 3.11, §11.1, §16; PA 4.14, 4.18; WB §26.3.
 Look at: where the work sits on the adoption ladder (awareness, tryout, routine, default, embedded, self-governing); the definition, denominator and method behind any adoption number; the first adopter outside the home team; bypass and exception rates; enablement kits (workshops, critique rubric, onboarding, office hours, templates); what another designer did successfully without the author present.
+Ask what would show it is adopted but failing, and whether design and code adoption were measured apart (DR 13.4).
 - **3:** Usage and qualitative feedback are tracked; teammates reuse the work.
 - **4:** Meaningful adoption and health metrics; several product teams adopt; documentation and training back it; other designers work independently; data sets priorities.
 - **5:** The system is run as a product with telemetry, hypotheses and investment calls; adoption sustains itself through contributors and champions.

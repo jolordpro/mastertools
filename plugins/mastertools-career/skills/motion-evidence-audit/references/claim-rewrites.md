@@ -2,7 +2,7 @@
 
 Read this when rewriting a resume bullet, LinkedIn line, case-study sentence or site copy. Evidence rules and the strip test are in `evidence-and-gates.md`.
 
-Source codes: **FR** Forensic Rubric (§7.1, §6.2, §12.2), **FW1** Assessment Framework (§27), **PA** Portfolio Audit (§16.5, §12.2).
+Source codes: **FR** Forensic Rubric (§7.1, §6.2, §12.2), **FW1** Assessment Framework (§27), **PA** Portfolio Audit (§16.5, §12.2), **DR** = staff_principal_design_research, **DOS** = motion_systems_dossier ("Motion Systems at Scale"), **RES** = motion_systems_research, **MKB4** = staff_motion_designer_master_knowledge_base_v4.
 
 Every example below is invented, and every number is a letter or a bracketed placeholder on purpose. Do not copy example wording into someone's real material. For the user's own work, facts come only from their verified source (see SKILL.md).
 
@@ -78,6 +78,18 @@ For resume and LinkedIn audits, these nine questions locate the missing slots. A
 | "Animation increased conversion" | Correlation, contribution or causation; test design? | "Release correlated with [x]; [A/B or not]; [caveats]" |
 
 Two further rules. **Saved versus enabled:** never claim hours saved on work that was never done by hand; report it as scope enabled (it could not be done before) and keep the two numbers apart. **Machine time is not designer time:** faster renders are a separate claim from reclaimed designer hours.
+
+## Problem statements by level (DR 5.4)
+The level of the strongest problem statement shows the scope the author worked at.
+
+| Level | Weak | Strong |
+|---|---|---|
+| Feature | "The transition looks inconsistent." | "Four teams show the same state change with different spatial and temporal logic." |
+| System | "We need a motion library." | "Teams keep inventing timing and state behavior because the product has no semantic motion vocabulary." |
+| Organization | "The design system is underused." | "Teams bypass the system because discoverability, contribution cost and flexibility don't match delivery incentives." |
+| Principal | "Our products feel inconsistent." | "There's no shared model of where global consistency ends and local expression begins, which causes both duplication and governance friction." |
+
+Rewrite a weak statement by naming the mechanism, the teams affected and the evidence.
 
 ## 6. Worked examples (invented)
 

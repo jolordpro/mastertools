@@ -59,7 +59,7 @@ Studio and freelance income rarely reaches it except through studio margin, dire
 
 Use the person's own target. If they didn't give one, report the band and what it buys; don't assume $300K.
 
-For each candidate role, classify the target against the band or a sourced TC estimate: **clears** (the band's floor is at or above it), **inside** (it falls within the band), **stretch** (only the top of band reaches it) or **out**. Say it precisely: $300K against a $305K–$400K band clears it, it isn't "inside". Keep base and total comp apart. Use the remote truth from the text. A posted band that tops out below the target is out unless equity math says otherwise.
+For each candidate role, classify the target against the band or a sourced TC estimate: **clears** (the band's floor is at or above it), **inside** (it falls within the band), **stretch** (only the top of band reaches it) or **out**. Say it precisely: a $200K target against a band whose floor is $205K clears it; it isn't "inside". Keep base and total comp apart. Use the remote truth from the text. A posted band that tops out below the target is out unless equity math says otherwise.
 
 Postings show base, so for equity payers estimate TC per level from single offers and build the map employer × level: who pays the target at Senior, and who only at Staff. For product and UI motion people this route is usually the main one.
 
@@ -141,7 +141,7 @@ Only for real forks. Optimize risk-adjusted expected total comp over the person'
 Before presenting, attack the draft:
 - Which single assumption, if wrong, flips the top recommendation? Check it now if a search can.
 - How would a recruiter at the target company poke holes in this plan for this person?
-- Did live data contradict the priors or the person's premise ("Anthropic pays $260K–$305K", "Houdini gets me to $300K")? Test premises against postings, not opinion.
+- Did live data contradict the priors or the person's premise ("this company pays at the top of the market", "one more tool gets me to my number")? Test premises against postings, not opinion.
 - Am I prescribing volume where depth is the lever, or a level the evidence doesn't support?
 - Are the odds honest?
 - Do the tables and the text use the same numbers? Recompute the figures that drive the decision once more from the source.

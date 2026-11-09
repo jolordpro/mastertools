@@ -2,7 +2,7 @@
 
 Read this when mapping a surface to dimensions, reviewing a case study's structure, choosing artifacts for the work-order list, or scanning for red flags. Rubric and gates are in `rubric.md` and `evidence-and-gates.md`.
 
-Source codes: **FW1**, **FW0**, **FR**, **PA**, **WB**, **HI** as defined in `rubric.md`.
+Source codes: **FW1**, **FW0**, **FR**, **PA**, **WB**, **HI** as defined in `rubric.md`; new: **DR** = staff_principal_design_research, **DOS** = motion_systems_dossier ("Motion Systems at Scale"), **RES** = motion_systems_research, **MKB4** = staff_motion_designer_master_knowledge_base_v4.
 
 ## 1. What each surface can prove
 
@@ -137,6 +137,15 @@ From FW1 §31. Use the IDs in the work-order list. Columns:
 | A19 | Before and after production audit across real surfaces | D10, D12 | M to L | Earn | PM, DS |
 | A20 | Leadership narrative (why the investment, what it changes) | D13, D10 | S | Build | CL, PM, DS |
 
+Additions beyond FW1 §31:
+
+| ID | Artifact (what it proves) | Closes | Effort | Move | Cares |
+|---|---|---|---|---|---|
+| A21 | Migration simulation: an old-to-new mapping, pilot plan, compatibility window and drift audit for a real or public system (MKB4) | D11, D12 | S to M | Build | DS, PM, CL |
+| A22 | Removal case: motion that looked better at first, evidence of harm, then changed or removed, and the rule fed back into the system (DOS 9.4, 14.5) | D1, D10, D11 | S | Surface | PM, DS, CL |
+
+A21 made independently is honest when labelled a simulation; it proves change-management thinking, not adoption.
+
 Rules for using the library:
 - **Never advise manufacturing evidence.** A Build artifact made independently (a public teardown, a personal token set, a recreated interaction) is honest if labelled as such. It proves the capability, not adoption. Adoption, outcome and durability gaps are Earn moves. If no document can close a gap, say "cannot be closed by a document" and name the real-world move (release the tool to colleagues, run the audit on a live product, ask a partner team to adopt a pattern and record the result).
 - **Check ownership before recommending a tool artifact.** Employer-built code may not be publishable. Offer a method-only write-up or a clean-room rebuild instead.
@@ -179,5 +188,9 @@ Use the IDs in your working; in the report, describe each flag in plain words wi
 | RF-28 | System for its own sake | Premature abstraction, no real recurring problem or usage | The recurring problem and its evidence |
 | RF-29 | Craft absolutism | Cannot explain speed, accessibility, engineering or business trade-offs | A trade-off where craft lost |
 | RF-30 | Single-peak evidence | Only one project shows Staff-grade behavior | A second, independent situation |
+| RF-31 | Territory protection | The domain is presented as personal authority; others need permission | Who else changed the system, and how |
+| RF-32 | Vision without craft proximity | Strategy and direction, no hands-on reasoning about behavior | Reason through one behavior decision in detail |
+| RF-33 | Standardization that suppresses local learning | Org-wide rules with no path for product-specific discovery to flow back | What a product team taught the system |
+| RF-34 | Executive-only alignment | Leadership sign-off, no practitioner buy-in | What practitioners did with it unprompted |
 
 Craft signals that look impressive but should score lower (WB §18.1) also belong here when seen: long choreographed intros on ordinary interactions; dramatic easing on high-frequency controls; 3D or WebGL as stand-in for state logic; no cancel, reversal or async example; no reduced-motion variant; specs with many timing values and no semantic taxonomy; a clip delivered where runtime state changes are required.

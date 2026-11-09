@@ -69,7 +69,9 @@ Write for the person who will act on it, in the words a hiring manager would use
 - **Staff has several valid shapes** (system architect, cross-team lead, hardest-problem solver, organizational steward). Do not require all. Do not read a missing management title as missing seniority, or a Principal title as Principal scope.
 - **Anti-conflation:** beautiful animation is not a motion system; a handoff meeting is not engineering influence; publishing is not adoption; a tool existing is not infrastructure. Full list in `references/evidence-and-gates.md` section 7.
 - **Broadcast and studio work translates, but only through a bridge** (`references/portfolio-architecture.md` section 5). Templates, rule sets and tools that let others produce the work count as leverage; the finished package, however good, counts as craft.
-- **Never score on prestige** of employer or client. Score the separable personal contribution.
+- **Never score on prestige** of employer or client, **or on terminology density**. "State machine", "tokens",
+  "motion language" and "design system" are evidence only when an artifact, decision, adoption record or outcome
+  backs them (KB-S 36.2). Score the separable personal contribution.
 
 ## When auditing the user's own work
 

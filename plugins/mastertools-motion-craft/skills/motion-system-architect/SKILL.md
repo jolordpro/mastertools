@@ -202,7 +202,7 @@ parts are retro.
 - `references/contracts-and-specs.md`: rungs 7, 10-11, contract YAML, parameter surface, 12-doc set, QA
 - `references/broadcast-package.md`: broadcast package inventory (element families, variant matrix, dependencies, partner guide)
 - `references/governance.md`: rung 12, lifecycle, semver, contribution, exceptions, changelog
-- `references/platforms-and-runtimes.md`: emitters (CSS, WAAPI/Motion, AE, Lottie/Rive, SwiftUI/Compose), spring translation
+- `references/platforms-and-runtimes.md`: emitters (CSS, WAAPI/Motion, AE, Lottie/Rive, SwiftUI/Compose), spring translation, integration entry point and production model (section 1)
 - `references/benchmarks.md`: calibration facts, as_of 2026-10-04, volatility flags
 - `references/ai-state-motion.md`: the `ai-states` mode
 - `assets/behavior-card-template.md`, `assets/example-tokens.json`, `scripts/validate_tokens.py`

@@ -174,12 +174,14 @@ def crumbs(path):
 
 
 def sentry_run(app):
-    """the newest SentryIO-db/*.run folder (AE's live session) and its session start (UTC string or None)."""
+    """AE's live session: the newest SentryIO-db/*.run folder that has a sibling <name>.run.lock (aerender leaves lockless
+    empty .run folders, Nov 2), else the newest *.run folder; and its session start (UTC string or None)."""
     import glob, json
     root = (TEST + "/sentry") if TEST else os.path.expanduser(SENTRY[app])
     runs = [d for d in glob.glob(os.path.join(root, "*.run")) if os.path.isdir(d)]
     if not runs: return None, None
-    d = max(runs, key=os.path.getmtime)
+    locked = [d for d in runs if os.path.exists(d + ".lock")]
+    d = max(locked or runs, key=os.path.getmtime)
     try: st = json.load(open(os.path.join(d, "session.json"))).get("started")
     except Exception: st = None
     return d, st

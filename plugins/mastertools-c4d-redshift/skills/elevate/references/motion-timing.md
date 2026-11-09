@@ -21,3 +21,5 @@ Taught in: SOM Animation Bootcamp (Joey Korenman) · SOM Advanced Motion Methods
 | MOT-09 | Linear moves | Ease with physical weight | Linear reads as mechanical | P | WIL | FIX | AE |
 | MOT-10 | Several accents on one beat | One hero action per beat | Staging | P | TJ:3 | C→S | — |
 | MOT-11 | A big move with no wind-up | A small anticipation in the opposite direction | Anticipation prepares the eye | P | TJ:3 | C→S | AE |
+| MOT-12 | Logo resolve feels busy; everything moves at once | Three beats: arrive (tumble in, camera dolly easing in), hold square with the glint, exit (turn away on one axis while the dolly continues the same direction) | The glint gets a still stage; the exit doesn't reverse the camera | T | TD-1105 §5 | C→S | — |
+| MOT-13 | The end hold reverses the shot's camera travel (pushes in after a whole shot of pulling out) | Keep the hold travelling the same way, slower, or lock it off | A reversal at the end reads as a mistake; art director's note: an amateur move | A | AD-1031 | FIX | — |

@@ -46,7 +46,7 @@ AE MCP or UXP readout paths in 2026: not verified.
 - Metalness between 0 and 1 on clean metal → MAT-09
 - Colored specular on dielectrics → MAT-04
 - Key within ~15° of the camera axis → LGT-02
-- Bevel size 0, or below what reads at delivery size → BEV-01
+- Bevel size 0, or below what reads at delivery size → BEV-01. Before trusting a 0 on C4D 2026/2027: the Extrude's Selection-tab toggles (ids 4004/4005) look like "End Bevel" but are not the bevel; the front bevel lives in the caps-and-bevels start fields (CAPSANDBEVELS_STARTBEVEL…). Confirm the bevel rows exist in the geometry before flagging
 - Rounded-corner shader on a hero close-up → BEV-03
 - Focal length under ~35 mm on a hero close-up → CAM-01
 - DOF off in a deep scene with a foreground → CAM-03, CAM-04

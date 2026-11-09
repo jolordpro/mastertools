@@ -1,6 +1,6 @@
 ---
 name: after-effects-engineering
-description: Master-level After Effects engineering — build, fix, rebuild, or modernize AE tooling of every kind. Use whenever the task involves After Effects scripting or automation (.jsx / ExtendScript), a ScriptUI panel, a CEP extension (.zxp / HTML+host bridge), AE expressions, the render queue / batch / project-audit work, matchName / property / keyframe / effect manipulation, presets & file I/O, or any "build me / fix my / make my old AE tool current" request. Drives a vehicle-first methodology (ScriptUI default, CEP co-equal, never UXP for AE), strict ES3 host discipline with guarded polyfills, a workflow-first + design-canon UX bar, and a QC gate — and verifies fast-moving facts (versions, APIs, UXP/CEP status) against live sources before relying on them.
+description: Master-level After Effects engineering — build, fix, rebuild, or modernize AE tooling of every kind. Use whenever the task involves After Effects scripting or automation (.jsx / ExtendScript), a ScriptUI panel, a CEP extension (.zxp / HTML+host bridge), AE expressions, the render queue / batch / project-audit work, a slow project (previews or renders that crawl), matchName / property / keyframe / effect manipulation, presets & file I/O, or any "build me / fix my / make my old AE tool current" request. Drives a vehicle-first methodology (ScriptUI default, CEP co-equal, never UXP for AE), strict ES3 host discipline with guarded polyfills, a workflow-first + design-canon UX bar, and a QC gate — and verifies fast-moving facts (versions, APIs, UXP/CEP status) against live sources before relying on them.
 ---
 
 If `~/.claude/overlays/after-effects-engineering/README.md` exists, read it first: the user's own picks, examples and paths. They win over this skill's defaults.
@@ -111,6 +111,7 @@ Classify the request, pull only the listed files (then apply the build sequence 
 | "Modernize / port to UXP" | **Correct the premise** — verify UXP-for-AE status (freshness protocol); offer ScriptUI or CEP |
 | Bug: "works for me, breaks for them" | [`00-platform-facts.md`](references/00-platform-facts.md) (phantom polyfill) → [`04-extendscript-rigor.md`](references/04-extendscript-rigor.md) (localization, undo/stale refs) |
 | "It's slow / freezes / hangs" | [`04-extendscript-rigor.md`](references/04-extendscript-rigor.md) (threading/progress, DOM-read perf) |
+| Slow project: preview won't play, render takes forever (not a script) | [`12-speed-triage.md`](references/12-speed-triage.md) (profiler first, then MFR, pixels, calculations, plate formats) |
 | "Does API X exist in 25/26?" | [`00-platform-facts.md`](references/00-platform-facts.md) → **verify live** (never invent) |
 | Effect / property / keyframe manipulation | [`04-extendscript-rigor.md`](references/04-extendscript-rigor.md) (matchName + robust apply) |
 | Writing/clearing expressions from a script | [`04-extendscript-rigor.md`](references/04-extendscript-rigor.md) (§expressions-from-scripts) + [`08-expressions.md`](references/08-expressions.md) |

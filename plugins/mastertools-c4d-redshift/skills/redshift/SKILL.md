@@ -222,6 +222,12 @@ IF IT FLICKERS   first lever
 For a quick question, answer the question. The contract is for settings
 requests, not for "what does combined depth do".
 
+**Finals.** When the settings are for a final render, show the user a settings
+card before it starts, with every red flag named: below-hero values, size below
+delivery, added grain, CPU fallback. A final render must use the hero settings;
+anything lower is the user's call, made with the card in front of them. Don't
+copy hero numbers here.
+
 ## Register
 
 Explain the mechanism in plain language

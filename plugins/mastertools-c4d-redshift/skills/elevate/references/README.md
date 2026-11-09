@@ -88,14 +88,14 @@ Knowledge base for /elevate: elevation ideas for a mostly built C4D or AE scene,
 | playbook-logo-resolve.md | PB-LOGO: extruded logo or type resolve |
 | playbook-glass-panel.md | PB-GLASS: glass panel |
 | playbooks-stub.md | Player cutout, stat graphic, arena, AE type piece |
-| lighting.md | LGT-01–20 |
+| lighting.md | LGT-01–26 |
 | color.md | CLR-01–14 |
-| materials-texture.md | MAT-01–18, MAT-S1–S3 |
-| bevels-edges.md | BEV-01–11 |
+| materials-texture.md | MAT-01–20, MAT-S1–S3 |
+| bevels-edges.md | BEV-01–15 |
 | camera-lens.md | CAM-01–14 |
-| composition.md | CMP-01–11, ASP-01–03 |
+| composition.md | CMP-01–12, ASP-01–03 |
 | typography.md | TYP-01–15 |
-| motion-timing.md | MOT-01–11 |
+| motion-timing.md | MOT-01–13 |
 | finishing.md | FIN-01–11 |
 | ae-native.md | AE-01–07 |
 | ladders.md | Competent / strong / world-class per dimension (draft A) |
@@ -104,6 +104,8 @@ Knowledge base for /elevate: elevation ideas for a mostly built C4D or AE scene,
 | moments.md | Dated reference moments from published breakdowns |
 
 ## Change log
+- **2026-11-07:** SKILL.md Iterating gains "Notes before renders, every round" (the user's words looked up first, a Pass steps line, probes count as looking, no render before the notes are in a file), and two repeats of one complaint mean a construction change or a probe. Workflow gains a plan-stage route (reference first, elevate at the first clay frames) and deep mode is offered at plan stage for remakes. `vision-protocol.md` Frame prep: dark frames (median luma under about 40) get gamma-lifted crops for construction calls. `frame_prep.py` names the cause when `python3 -I` hides Pillow.
+- **2026-11-05:** from live use. SKILL.md: law 10 (prove a Try's direction; A/B before blaming a cause), repeat/primitive and speed-jump checks on the first read, remake push, `hold:` on Try lines, a round ledger with keep lines and a reversal check, the change-the-layer ladder for a CGI read, overshoot checks for banded fixes, flagged frames, emission and stages, the limit of a measure, deep mode, labelled strips in set mode, audio routed to motion-critique, an unattended line and a lessons-intake line. From a teardown of a delivered broadcast logo chip: BEV-12–15, LGT-21–23, MAT-19–20, CLY-09–10, MOT-12, PB-LOGO steps, sources TD-1105 and MAXON-RC. From a C4D lessons file: LGT-24–26. MOT-13 from an art director's note. Readout: C4D bevel field caution. vision-protocol gains the CGI ladder and deep mode. New rows are T (one scene) except MOT-13, A. After review: LGT-23, CLY-10 and BEV-13 relabelled T, the speed-jump line made a test value, LGT-24 states the intensity test, unattended picks go to their hand-off skill.
 - **2026-10-31:** MAT-18 says to save the scene before pre-converting library maps, so saved scenes keep library paths, and states the proof: with pre-converted maps, the scenes rendered with no conversions. No label changed.
 - **2026-10-31:** law 9 gains the licence flag. MAT-18 and LGT-20 gain the headless step: pre-convert library maps before rendering, then confirm the first frame, because headless Redshift 2027.0.1 hung converting library maps and pre-converted maps rendered clean. No label changed.
 - **2026-10-31 (art-director ruling):** added SKILL.md law 9 (asset library first), MAT-18 (materials and models) and LGT-20 (light rigs and HDRIs), an output-contract line that names the library asset and its path, and a Hand-offs row for asset-library tools. Fixed the Files table: materials-texture.md listed MAT-01–13 but held MAT-01–17. No existing row changed. MAT-12 (rebuild a stock hero material from photo reference) and LGT-04/05 (designed key and cards place the hero highlights) still apply on top of a library asset.

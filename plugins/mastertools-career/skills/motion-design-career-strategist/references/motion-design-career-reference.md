@@ -176,23 +176,6 @@ Checked by live research on 2026-10-16/17; rows added 2026-10-17 come from the e
 
 | Data point | Figure | Source |
 |---|---|---|
-| Anthropic, Motion Designer, Core Brand | $260K–$305K base; US remote-friendly with ~25% office time (SF/NY); 6+ yrs. **Closed:** Anthropic's board listed no motion roles on 2026-10-17 | https://job-boards.greenhouse.io/anthropic/jobs/5116771008 |
-| OpenAI, Motion Designer, Business Marketing | $223K–$247K + equity; SF, hybrid 3 days/week (board's remote flag says otherwise); published 2026-10-14 | https://jobs.ashbyhq.com/openai/c1d765b3-182e-4874-8316-12ce509a7f9f |
-| Mercury, Staff Motion Designer - 3D | $170.4K–$236.7K; SF/NY/Portland or remote US/Canada; published 2026-09-16 | https://job-boards.greenhouse.io/mercury/jobs/6196208004 |
-| Adobe, Motion Graphics Designer / Animator | $94.9K–$209.6K; San Francisco; posted 2026-09-24 | https://adobe.wd5.myworkdayjobs.com/external_experienced/job/San-Francisco/Motion-Graphics-Designer--Animator_R172121 |
-| OpenAI, Motion Designer (GTM Creative) | $240K + equity; SF; 8+ yrs; closed | https://jobs.omegavp.com/companies/openai/jobs/65017532-motion-designer |
-| Perplexity, Motion Designer | $180K–$210K + equity; listed US remote, SF or NY (Jun 2026 mirror); the employer's own board on 2026-10-17 shows New York City with a conflicting remote flag, published 2026-09-02 | https://jobs.ashbyhq.com/perplexity/39d520eb-6b81-4b61-8b23-5efcdac4cad9 |
-| Apple, Senior Art Director, Motion Design (Marcom, LA) | $173.5K–$260.8K + stock and bonus; 9+ yrs; AE + C4D/Redshift | https://www.mediabistro.com/jobs/3539052781-apple-is-hiring-senior-art-director-motion-design-in-los-angeles |
-| Airbnb, Creative Lead, Motion Design | $157K–$182K; remote US; 8+ yrs | https://careers.airbnb.com/positions/7028612 |
-| Meta, Motion Graphics Designer, Creative X | $122K–$175K + bonus and equity; NY; AE, C4D/Blender, gen-AI tools; closed | https://jobs.accel.com/companies/facebook-2-07d2eb1b-d3ad-4084-93df-74a124ac9233/jobs/88434585-motion-graphics-designer-creative-x |
-| Google, Motion Design Creative, Creative Lab | $117K–$168K + equity; Apr 2026 | https://jobs.asugsvsummit.com/companies/google-24698/jobs/76479699-motion-design-creative-creative-lab |
-| Google, Motion Designer, Search AI Mode | $132K–$189K + equity; Lottie and light coding; Jun 2026 | https://jobs.anitab.org/companies/google-24698/jobs/81196069-motion-designer-search-ai-mode |
-| Google, Senior Motion Designer, Design Platform | $159K–$231K + equity; Mar 2026 | https://jobs.asugsvsummit.com/companies/google-24698/jobs/70591605-senior-motion-designer-google-design-platform |
-| Google, Staff Motion Designer, Android + Pixel | $188K–$275K + equity; Jul 2026 | https://designproject.io/jobs/staff-motion-designer-android-plus-pixel-ux-at-google-cvhlnb |
-| Duolingo, Senior Motion Designer (in-app) | $130.9K–$177.1K; Rive a plus; Sep 2025, closed | https://builtin.com/job/senior-motion-designer/7050803 |
-| Brex, Senior Motion Designer (brand + UI) | $147K–$187K + equity; Rive or Framer; closed | https://careers.base10.vc/companies/brex/jobs/69450211-senior-motion-designer |
-| Ripple, Senior Motion Brand Designer (NYC) | $112K–$135K; Feb 2026 | https://www.marketingmonk.so/jobboard/jobs/senior-motion-brand-designer-at-ripple-efo1or |
-| Weight Watchers, Senior Motion & Brand Designer (NYC) | $110K–$115K; Sep 2026 | https://designproject.io/jobs/senior-motion-and-brand-designer-at-weight-watchers-lxw7zx |
 | Levels.fyi, Product Designer averages (all specialties, not motion-only) | Meta IC5 $343K, IC6 $468K; Google L4 $284K, L5 $383K, L6 $530K; Apple ICT4 $339K, ICT5 $438K | https://www.levels.fyi/companies/meta/salaries/product-designer/levels/ic5 ; https://www.levels.fyi/companies/google/salaries/product-designer ; https://www.levels.fyi/companies/apple/salaries/product-designer |
 | Rive contract rates | Apex Systems (Rive + front-end code) $50–$58/hr; Rilla $60–$100/hr; Contra marketplace $30–$60/hr | https://www.mediabistro.com/jobs/3539271934-apex-systems-is-hiring-technical-motion-designer-in-seattle ; https://hotfix.jobs/jobs/rive-motion-designer-and-animator-contract-to-hire-at-rilla-ce30c13d-90e8-4bf4-b676-549be41c6a84 |
 | School of Motion 2026 salary guide | Day rates by experience (§4.3); plans on 150–200 billable days | https://www.schoolofmotion.com/blog/motion-design-salaries-in-2026-your-complete-guide-to-what-you-can-earn-and-how-to-earn-more |
