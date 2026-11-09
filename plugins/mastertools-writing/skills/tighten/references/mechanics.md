@@ -58,7 +58,7 @@ rings. The short line is the one they remember.
 **Concrete over abstract.** Swap a vague adjective for a number or a name.
 Numbers and names read as true; adjectives read as opinion.
 - Before: *an award-winning creative leader with extensive experience*
-- After: *Two regional Emmys. Fifteen years. NBC, CBS, A+E, now a regional sports network.*
+- After: *Two design awards. Twelve years. Three agencies, now a product studio.*
 - When the specific is missing, write `[NEEDS: the real number/name]`. Never
   invent it.
 

@@ -87,7 +87,7 @@
       "name": "mastertools-writing",
       "source": "./plugins/mastertools-writing",
       "description": "Writing module for Master Tools.",
-      "version": "0.1.2"
+      "version": "0.1.3"
     }
   ]
 }
